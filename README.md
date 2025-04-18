@@ -1,17 +1,53 @@
 ## Getting Started
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Petopia 🐾
 
-## Folder Structure
+## Information
 
-The workspace contains two folders by default, where:
+Petopia adalah proyek UAS mata kuliah Pemrograman Berbasis Objek yang dikembangkan oleh kelompok 5. Aplikasi ini dibuat untuk mempermudah manajemen data hewan peliharaan, pembelian pet, stok, serta transaksi yang terjadi dalam toko hewan peliharaan. ~ By FaizNation
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+---
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+##  Contributor
+| NAMA | NIM |
+|--------|--------|
+| **Fadly Fais Fajarruddin** | 24111814015 |
+| **Muhammad Hafizh Shafa Rabbani** | 24111814053 |
+| **Riski Rahmattillah Pratama** | 24111814079 |
+| **Manda Fatimah Azaziah** | 24111814044 |
+| **Fajar Adhitya Pratama** |  24111814087 |
+| **Hanna Maulidhea** |  24111814091 |
+| **Ismail Ali Mukharom** |  24111814130 |
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+---
+## 📸 Preview
+```
+╔════════════════════════════════════════════════════════════╗
+║               Selamat datang di Petopia!                   ║
+╚════════════════════════════════════════════════════════════╝
+```
+---
+### Features
+- Manajemen Data Hewan  
+- Pencarian Hewan (Searching)   
+- Pengurutan Data (Sorting)  
+- Edit Data Hewan 
+- Pembelian Hewan 
+- Perhitungan Total Harga 
+
+
+## License: 
+- [MIT](https://choosealicense.com/licenses/mit/)
+
+## Thanks to
+
+| [<img src="https://avatars.githubusercontent.com/u/189825677?v=4" width="250"/>](https://github.com/Apissr) | [<img src="https://avatars.githubusercontent.com/u/207812064?v=4" width="250"/>](https://github.com/rahmatsigma) |[<img src="https://avatars.githubusercontent.com/u/207877704?v=4" width="250"/>](https://github.com/mandaazaziah)  |
+| --- | --- | --- |
+| **Muhammad Hafizh Shafa Rabbani** | **Riski Rahmattillah Pratama** | **Manda Fatimah Azaziah** |
+
+| [<img src="https://avatars.githubusercontent.com/u/208164527?v=4" width="250"/>](https://github.com/DitPrata03) |[<img src="https://avatars.githubusercontent.com/u/207872670?v=4" width="250"/>](https://github.com/maulidhea) | [<img src="https://avatars.githubusercontent.com/u/200033565?v=4" width="250"/>](https://github.com/IlDarkCloud) |
+| --- | --- | --- |
+| **Fajar Adhitya Pratama** | **Hanna Maulidhea** | **Ismail Ali Mukharom** |
 
 ## Dependency Management
 
