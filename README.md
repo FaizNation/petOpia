@@ -1,4 +1,4 @@
-## Getting Started
+## Petopia 🐾
 
 Petopia 🐾
 
