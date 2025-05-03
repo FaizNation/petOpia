@@ -1,25 +1,25 @@
-package services; // package services
+package services;
 
-import java.time.LocalDate; // 📅 Import LocalDate untuk menangani tanggal pemeriksaan terakhir 📅
-import java.time.format.DateTimeParseException; // 📅 Import DateTimeParseException untuk menangani kesalahan format tanggal 📅
-import java.util.ArrayList; // 📦 Import ArrayList untuk menyimpan daftar pet yang tersedia 📦
-import java.util.Scanner; // 📦 Import Scanner untuk membaca input dari pengguna 📦
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-import models.anjing; // 🐶 Import model anjing untuk mengelola data anjing 🐶
-import utils.function; // 📦 Import function untuk menampilkan menu dan judul aplikasi 📦
-import models.petList; // 📦 Import petList untuk menyimpan data pet yang tersedia 📦
+import models.anjing;
+import utils.function;
+import models.petList;
 
 public class serviceDog {
-    static ArrayList<anjing> listAnjing = service.listAnjing; // 📦 ArrayList untuk menyimpan daftar pet anjing yang tersedia 📦
-    //function display anjing
+    static ArrayList<anjing> listAnjing = service.listAnjing;
+
     public static void displayAlldoggys() {
-        // 📦 Cek apakah list anjing kosong
+
         if (listAnjing == null || listAnjing.isEmpty()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                     Tidak ada data pet yang tersedia                  ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             return;
-        } else { // 📋 Menampilkan daftar anjing
+        } else {
             int i = 1;
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                           Daftar Semua Pet                            ║");
@@ -27,14 +27,14 @@ public class serviceDog {
             System.out.printf("║ %-3s | %-13s | %-17s | %-10s | %-14s ║\n",
                     "No", "Ras", "Harga", "Stok", "Diskon");
             System.out.println("╠═════|═══════════════|═══════════════════|════════════|════════════════╣");
-            // 🔄 Loop untuk menampilkan setiap pet dalam daftar 🔄
+
             for (petList doggy : listAnjing) {
                 if (doggy instanceof anjing) {
                     String hargaFormatted = String.format("%, .2f", doggy.getHargaPet()).replace(",", ".");
                     System.out.printf("║ %-3s | %-13s | Rp%-15s | %-10d | %-3.0f%%           ║\n", i,
                             doggy.getrasPet(), hargaFormatted, doggy.getStokPet(),
                             doggy.getDiskonPet() * 100);
-                    i++; // 🔢 Menambah nomor urut
+                    i++;
                 }
             }
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
@@ -42,41 +42,40 @@ public class serviceDog {
 
     }
 
-    // function Menampilkan detail anjing berdasarkan pilihan pengguna
     public static void displayDetailDoggy(Scanner scanner) {
-        // 📋 Menampilkan seluruh daftar anjing terlebih dahulu
+
         displayAlldoggys();
-        if (listAnjing == null || listAnjing.isEmpty()) { // ❗ Cek apakah daftar anjing kosong
+        if (listAnjing == null || listAnjing.isEmpty()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║              [ERROR] | Tidak ada data pet yang tersedia               ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             return;
         }
-        // ❓ Konfirmasi apakah user ingin melihat detail salah satu anjing
+
         System.out.print("\nApakah ingin melihat detail salah satu pet? (y/n): ");
         String konfirmasi = scanner.nextLine().trim().toLowerCase();
 
         if (!konfirmasi.equals("y")) {
-            return; // 🔙 Jika tidak, kembali ke menu sebelumnya
+            return;
         }
         System.out.print("Masukkan nomor pet anjing yang ingin dilihat: ");
         int pilihan = scanner.nextInt();
         scanner.nextLine();
-        // ⚠️ apakah nomor yang dipilih valid
+
         if (pilihan < 1 || pilihan > listAnjing.size()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║        [ERROR] | Nomor tidak tersedia. Silakan coba lagi.             ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             return;
         }
-        // 🎯 Mengambil objek anjing yang dipilih berdasarkan nomor
+
         petList petDipilih = listAnjing.get(pilihan - 1);
-        // ✅ Pastikan objek tersebut benar-benar instance dari class anjing
-        if (petDipilih instanceof anjing) { // instaceof untuk mengecek apakah petDipilih adalah anjing
-            anjing chien = (anjing) petDipilih; // 🐶 Mengkonversi petDipilih menjadi objek anjing
+
+        if (petDipilih instanceof anjing) {
+            anjing chien = (anjing) petDipilih;
             function.spasi();
             function.spinnerLoading("MenCari data pet ", 2000);
-            // 🖼️ Menampilkan header detail
+
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail anjing " + chien.getrasPet());
             System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
@@ -88,78 +87,77 @@ public class serviceDog {
             System.out.printf("║ %-69s ║\n", " Diskon               : " + (chien.getDiskonPet() * 100) + "%");
             System.out.printf("║ %-69s ║\n", " Tinggi               : " + chien.getTinggi());
             System.out.printf("║ %-69s ║\n", " Rating Latihan       : " + chien.getLatihan());
-            // 💉 Menampilkan informasi kesehatan anjing
+
             petList.HealthRecord health = chien.getHealthRecord();
             System.out.printf("║ %-69s ║\n", " Pemeriksaan Terakhir : " + health.getLastCheckup());
             System.out.printf("║ %-69s ║\n", " Status Vaksin        : " + health.getVaccineStatus());
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
-        } else { // ❌ Jika data bukan anjing, tampilkan pesan error
+        } else {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                [ERROR] | Data bukan tipe Anjing!!!.                   ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         }
     }
 
-    // function untuk menampilkan menu edit anjing
     public static void editDoggy(Scanner scanner) {
-        displayAlldoggys(); // 📋 Tampilkan semua anjing yang tersedia terlebih dahulu
-        System.out.print("\nMasukkan nomor pet yang ingin diedit: "); // 🔢 Input nomor anjing yang ingin diedit
+        displayAlldoggys();
+        System.out.print("\nMasukkan nomor pet yang ingin diedit: ");
         int index = scanner.nextInt() - 1;
         scanner.nextLine();
-        // ✅ Cek apakah indeks valid 
-        if (index >= 0 && index < listAnjing.size()) { // 🎯 Ambil objek anjing berdasarkan indeks
+
+        if (index >= 0 && index < listAnjing.size()) {
             petList petEdit = listAnjing.get(index);
             boolean editing = true;
 
-            while (editing) { // 🖊️ Tampilkan menu edit anjing
+            while (editing) {
                 System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
                 System.out.printf("║ %-70s ║\n", "                         Mengedit pet: " + petEdit.getrasPet());
-                function.displayMenuEditDogs(); // 📜 Menampilkan menu edit anjing 📜
+                function.displayMenuEditDogs();
                 int subPilihan = scanner.nextInt();
                 scanner.nextLine();
-                // ✏️ Gunakan switch-case untuk memilih bagian yang ingin diedit
+
                 switch (subPilihan) {
-                    case 1: // 📝 Edit nama/ras anjing
+                    case 1:
                         System.out.print("Masukkan nama baru: ");
                         String namaBaru = scanner.nextLine();
                         petEdit.setrasPet(namaBaru);
                         break;
-                    case 2: // 💸 Edit harga
+                    case 2:
                         System.out.print("Masukkan harga baru: ");
                         double hargaBaru = scanner.nextDouble();
                         petEdit.setHargaPet(hargaBaru);
                         break;
-                    case 3: // 📦 Edit stok
+                    case 3:
                         System.out.print("Masukkan stok baru: ");
                         int stokBaru = scanner.nextInt();
                         petEdit.setStokPet(stokBaru);
                         break;
-                    case 4: // 🧬 Edit jenis
+                    case 4:
                         System.out.print("Masukkan jenis baru: ");
                         String jenisBaru = scanner.nextLine();
                         petEdit.setjenisPet(jenisBaru);
                         break;
-                    case 5: // 🎁 Edit diskon
+                    case 5:
                         System.out.print("Masukkan diskon baru (dalam %): ");
                         double diskonBaru = scanner.nextDouble() / 100;
                         petEdit.setDiskonPet(diskonBaru);
                         break;
-                    case 6: // 📏 Edit tinggi
+                    case 6:
                         if (petEdit instanceof anjing) {
                             System.out.print("Masukkan tinggi baru: ");
                             String tinggiBaru = scanner.nextLine();
                             ((anjing) petEdit).setTinggi(tinggiBaru);
                         }
                         break;
-                    case 7: // ⭐ Edit rating latihan
-                        function.displayRating(); // 📊 Menampilkan rating 📊
+                    case 7:
+                        function.displayRating();
                         if (petEdit instanceof anjing) {
                             System.out.print("Masukkan Rating Latihan (Copy Ratingnya): ");
                             String latihanBaru = scanner.nextLine();
                             ((anjing) petEdit).setLatihan(latihanBaru);
                         }
                         break;
-                    case 8: // 🩺 Edit data kesehatan
+                    case 8:
                         petList.HealthRecord record = petEdit.getHealthRecord();
                         System.out.print("Masukkan tanggal pemeriksaan terakhir (yyyy-mm-dd): ");
                         String tanggalString = scanner.nextLine();
@@ -167,25 +165,29 @@ public class serviceDog {
                             LocalDate tanggal = LocalDate.parse(tanggalString);
                             record.setLastCheckup(tanggal);
                         } catch (DateTimeParseException e) {
-                            System.out.println( "\n╔═══════════════════════════════════════════════════════════════════════╗");
-                            System.out.println("║        [ERROR] | Format tanggal salah. Gunakan format yyyy-mm-dd      ║");
-                            System.out.println( "╚═══════════════════════════════════════════════════════════════════════╝");
+                            System.out.println(
+                                    "\n╔═══════════════════════════════════════════════════════════════════════╗");
+                            System.out.println(
+                                    "║        [ERROR] | Format tanggal salah. Gunakan format yyyy-mm-dd      ║");
+                            System.out.println(
+                                    "╚═══════════════════════════════════════════════════════════════════════╝");
                         }
-                        function.displayVaksin(); // 💉 Tampilkan opsi vaksin dan masukkan status vaksin
+                        function.displayVaksin();
                         System.out.print("Masukkan status vaksin (Copy Statusnya): ");
                         String vaksinStatus = scanner.nextLine();
                         record.setVaccineStatus(vaksinStatus);
                         break;
-                    case 0:  // 🚪 Keluar dari mode edit
+                    case 0:
                         editing = false;
                         function.spasi();
-                        function.retroSpinner("Menyimpan perubahan", 1500);// 🌀 Tampilkan animasi keluar
+                        function.retroSpinner("Menyimpan perubahan", 1500);
                         System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
                         System.out.println("║                   [SUCCESS] | BERHASIL MENGEDIT PET                   ║");
                         System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
                         break;
-                    default: // ❌ Input pilihan tidak valid
-                        System.out.println("\n╔═══════════════════════════════════════════════════════════════════════╗");
+                    default:
+                        System.out
+                                .println("\n╔═══════════════════════════════════════════════════════════════════════╗");
                         System.out.println("║                      [ERROR] | PILIHAN TIDAK VALID                    ║");
                         System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
                 }
@@ -209,13 +211,13 @@ public class serviceDog {
                 String latihan = ((anjing) petEdit).getLatihan();
                 System.out.printf("║ %-69s ║\n", " Latihan              : " + latihan);
             }
-            // 🧾 Tampilkan info kesehatan
+
             petList.HealthRecord health = petEdit.getHealthRecord();
             System.out.printf("║ %-69s ║\n", " Pemeriksaan Terakhir : " + health.getLastCheckup());
             System.out.printf("║ %-69s ║\n", " Status Vaksin        : " + health.getVaccineStatus());
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
 
-        } else { // ❌ Jika indeks tidak valid
+        } else {
             System.out.println("\n╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                   [ERROR] | NOMOR PET TIDAK VALID                     ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");

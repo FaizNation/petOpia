@@ -2,32 +2,31 @@ package utils;
 
 public class function {
 
-    // 📌 Function display Judul (Header)
     public static void displayJudul() {
-        // 🎨 Kode warna ANSI
-        String white = "\u001B[37m"; // Warna putih untuk teks biasa
-        String yellow = "\u001B[33m"; // Warna kuning khusus untuk kata "PETOPIA"
-        String reset = "\u001B[0m"; // Reset warna ke default terminal
+
+        String white = "\u001B[37m";
+        String yellow = "\u001B[33m";
+        String reset = "\u001B[0m";
 
         String[] lines = {
                 white + "╔═══════════════════════════════════════════════════════════════════════╗",
                 "║>>>                        SELAMAT DATANG DI                        <<<║",
-                // ✨ Bagian ini akan menampilkan kata PETOPIA dengan warna kuning
+
                 "║>>                          <<< " + yellow + "PETOPIA" + white + " >>>                          <<║",
                 "║>>>                    Temukan Sahabat Terbaikmu                    <<<║",
                 "╚═══════════════════════════════════════════════════════════════════════╝" + reset
         };
-        // 🔁 Loop untuk mencetak setiap baris dengan efek ketik
+
         for (String line : lines) {
             for (char c : line.toCharArray()) {
-                System.out.print(c); // Cetak karakter satu per satu
-                // ⏱️ Delay 2ms antar karakter untuk efek ketik
+                System.out.print(c);
+
                 try {
                     Thread.sleep(2);
                 } catch (InterruptedException e) {
                 }
             }
-            System.out.println(); // ❌ Jika thread terganggu, abaikan saja
+            System.out.println();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -35,7 +34,6 @@ public class function {
         }
     }
 
-    // 📌Function display Menu
     public static void displayMenu() {
         System.out.println("\n╔═══════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                MENU                                   ║");
@@ -49,7 +47,6 @@ public class function {
         System.out.print("Pilihan: ");
     }
 
-    // 📌Function display menu cari (menu 2)
     public static void displayMenuCari() {
         System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                MENU                                    ║");
@@ -61,7 +58,6 @@ public class function {
         System.out.print("Pilihan: ");
     }
 
-    // 📌Function display menu tampilkan (menu 1)
     public static void displayMenuTampilkan() {
         System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                MENU                                    ║");
@@ -74,7 +70,6 @@ public class function {
         System.out.print("Pilihan: ");
     }
 
-    // 📌Function display menu edit kucing
     public static void displayMenuEditCats() {
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║  1. ║ Ubah Nama                                                        ║");
@@ -90,7 +85,6 @@ public class function {
         System.out.print("Pilih bagian yang ingin diedit: ");
     }
 
-    // 📌Function display menu edit anjing
     public static void displayMenuEditDogs() {
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║  1. ║ Ubah Nama                                                        ║");
@@ -106,7 +100,6 @@ public class function {
         System.out.print("Pilih bagian yang ingin diedit: ");
     }
 
-    // 📌Function display menu edit ikan
     public static void displayMenuEditFish() {
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║  1. ║ Ubah Nama                                                        ║");
@@ -122,7 +115,6 @@ public class function {
         System.out.print("Pilih bagian yang ingin diedit: ");
     }
 
-    // 📌Function display menu edit burung
     public static void displayMenuEditbird() {
         System.out.println("╠════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║  1. ║ Ubah Nama                                                        ║");
@@ -138,7 +130,6 @@ public class function {
         System.out.print("Pilih bagian yang ingin diedit: ");
     }
 
-    // 📌Function display rating
     public static void displayRating() {
         System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                           Penjelasan Rating                            ║");
@@ -151,7 +142,6 @@ public class function {
         System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
     }
 
-    // 📌Function display vaksin
     public static void displayVaksin() {
         System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                           Penjelasan Vaksin                            ║");
@@ -163,13 +153,12 @@ public class function {
         System.out.println("╚════════════════════════════════════════════════════════════════════════╝");
     }
 
-    // 📌Function display by faiz nation (Footer)
     public static void displayFaizNation() {
-        // 🎨 Kode warna ANSI
-        String white = "\u001B[37m"; // Warna putih untuk teks biasa
-        String yellow = "\u001B[33m"; // Warna kuning khusus untuk kata "PETOPIA"
-        String reset = "\u001B[0m"; // Reset warna ke default terminal
-        // 📝 Daftar baris yang akan ditampilkan dengan kombinasi warna
+
+        String white = "\u001B[37m";
+        String yellow = "\u001B[33m";
+        String reset = "\u001B[0m";
+
         String[] lines = {
                 white + "╔════════════════════════════════════════════════════════════════════════╗",
                 "║>>>           TERIMAKASIH TELAH MENGGUNAKAN APLIKASI SAYA            <<<║",
@@ -182,24 +171,23 @@ public class function {
                 "║>>>                                                                  <<<║",
                 "╚════════════════════════════════════════════════════════════════════════╝" + reset
         };
-        // 🖋️ Efek ketik baris demi baris
+
         for (String line : lines) {
             for (char c : line.toCharArray()) {
-                System.out.print(c); // Cetak karakter satu per satu
+                System.out.print(c);
                 try {
                     Thread.sleep(2);
                 } catch (InterruptedException e) {
-                } // ⏳ Delay antar karakter (2ms untuk efek ketik cepat)
+                }
             }
-            System.out.println(); // Baris baru setelah selesai satu baris
+            System.out.println();
             try {
-                Thread.sleep(80); // ⏳ Delay antar baris
+                Thread.sleep(80);
             } catch (InterruptedException e) {
             }
         }
     }
 
-    // 📌Function display daftar jenis pet
     public static void displayDaftarJenis() {
         System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                           Jenis Pet Yang Tersedia                      ║");
@@ -277,7 +265,7 @@ public class function {
         System.out.println(" [SUCCESS]");
     }
 
-    public static void spasi () {
+    public static void spasi() {
         System.out.println("");
     }
 }
