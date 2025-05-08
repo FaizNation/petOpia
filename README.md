@@ -1,6 +1,6 @@
 ## Petopia 🐾
 
-Petopia 🐾
+PetOpia 🐾
 
 ## Information
 
@@ -12,12 +12,7 @@ Petopia adalah proyek UAS mata kuliah Pemrograman Berbasis Objek yang dikembangk
 | NAMA | NIM |
 |--------|--------|
 | **Fadly Fais Fajarruddin** | 24111814015 |
-| **Muhammad Hafizh Shafa Rabbani** | 24111814053 |
 | **Riski Rahmattillah Pratama** | 24111814079 |
-| **Manda Fatimah Azaziah** | 24111814044 |
-| **Fajar Adhitya Pratama** |  24111814087 |
-| **Hanna Maulidhea** |  24111814091 |
-| **Ismail Ali Mukharom** |  24111814130 |
 
 ---
 ## 📸 Preview
