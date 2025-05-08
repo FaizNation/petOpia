@@ -15,6 +15,7 @@ Petopia adalah proyek UAS mata kuliah Pemrograman Berbasis Objek yang dikembangk
 | **Riski Rahmattillah Pratama** | 24111814079 |
 | **Muhammad Hafizh Shafa R** | 24111814053 |
 | **Manda Fatimah Azaziah** | 24111814044 |
+| **Hanna Maulidhea** | 24111814091 |
 
 
 ---
