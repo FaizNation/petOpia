@@ -6,10 +6,17 @@
     "configurations": [
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "PetOpiaApplication",
             "request": "launch",
             "mainClass": "com.example.petOpia.PetOpiaApplication",
             "projectName": "petOpia"
+=======
+            "name": "petOPia",
+            "request": "launch",
+            "mainClass": "petOPia",
+            "projectName": "petOpia_eebe7a25"
+>>>>>>> 0ad4164c8e34c1453f2ceac1fa7fac25b4825da4
         },
         {
             "type": "java",
