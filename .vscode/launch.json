@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "petOPia",
+            "request": "launch",
+            "mainClass": "petOPia",
+            "projectName": "petOpia_eebe7a25"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
