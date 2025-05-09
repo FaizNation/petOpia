@@ -1,4 +1,4 @@
-package com.example.petOpia.utils;
+package utils;
 
 public class function {
 

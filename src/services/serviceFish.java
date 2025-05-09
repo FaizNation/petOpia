@@ -1,21 +1,21 @@
-package com.example.petOpia.services;
+package services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.example.petOpia.models.anjing;
-import com.example.petOpia.models.petList;
-import com.example.petOpia.utils.*;
+import models.ikan;
+import models.petList;
+import utils.*;
 
 
-public class serviceDog {
-    static ArrayList<anjing> listAnjing = service.listAnjing;
+public class serviceFish {
+    static ArrayList<ikan> listIkan = service.listIkan;
 
-    public static void displayAlldoggys() {
+    public static void displayiwak() {
 
-        if (listAnjing == null || listAnjing.isEmpty()) {
+        if (listIkan == null || listIkan.isEmpty()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                     Tidak ada data pet yang tersedia                  ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
@@ -29,24 +29,25 @@ public class serviceDog {
                     "No", "Ras", "Harga", "Stok", "Diskon");
             System.out.println("╠═════|═══════════════|═══════════════════|════════════|════════════════╣");
 
-            for (petList doggy : listAnjing) {
-                if (doggy instanceof anjing) {
-                    String hargaFormatted = String.format("%, .2f", doggy.getHargaPet()).replace(",", ".");
+            for (petList poisson : listIkan) {
+                if (poisson instanceof ikan) {
+                    String hargaFormatted = String.format("%, .2f",
+                            poisson.getHargaPet()).replace(",", ".");
                     System.out.printf("║ %-3s | %-13s | Rp%-15s | %-10d | %-3.0f%%           ║\n", i,
-                            doggy.getrasPet(), hargaFormatted, doggy.getStokPet(),
-                            doggy.getDiskonPet() * 100);
+                            poisson.getrasPet(), hargaFormatted,
+                            poisson.getStokPet(),
+                            poisson.getDiskonPet() * 100);
                     i++;
                 }
             }
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         }
-
     }
 
-    public static void displayDetailDoggy(Scanner scanner) {
+    public static void displayDetailIwak(Scanner scanner) {
 
-        displayAlldoggys();
-        if (listAnjing == null || listAnjing.isEmpty()) {
+        displayiwak();
+        if (listIkan == null || listIkan.isEmpty()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║              [ERROR] | Tidak ada data pet yang tersedia               ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
@@ -59,61 +60,61 @@ public class serviceDog {
         if (!konfirmasi.equals("y")) {
             return;
         }
-        System.out.print("Masukkan nomor pet anjing yang ingin dilihat: ");
+        System.out.print("Masukkan nomor pet ikan yang ingin dilihat: ");
         int pilihan = scanner.nextInt();
         scanner.nextLine();
 
-        if (pilihan < 1 || pilihan > listAnjing.size()) {
+        if (pilihan < 1 || pilihan > listIkan.size()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║        [ERROR] | Nomor tidak tersedia. Silakan coba lagi.             ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             return;
         }
 
-        petList petDipilih = listAnjing.get(pilihan - 1);
+        petList petDipilih = listIkan.get(pilihan - 1);
 
-        if (petDipilih instanceof anjing) {
-            anjing chien = (anjing) petDipilih;
+        if (petDipilih instanceof ikan) {
+            ikan poisson = (ikan) petDipilih;
             function.spasi();
             function.spinnerLoading("MenCari data pet ", 2000);
 
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
-            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail anjing " + chien.getrasPet());
+            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail ikan " + poisson.getrasPet());
             System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
-            System.out.printf("║ %-69s ║\n", " Ras anjing           : " + chien.getrasPet());
-            String hargaFormatted = String.format("%, .2f", chien.getHargaPet()).replace(",", ".");
+            System.out.printf("║ %-69s ║\n", " Ras ikan           : " + poisson.getrasPet());
+            String hargaFormatted = String.format("%, .2f", poisson.getHargaPet()).replace(",", ".");
             System.out.printf("║ %-69s ║\n", " Harga                : Rp" + hargaFormatted);
-            System.out.printf("║ %-69s ║\n", " Stok                 : " + chien.getStokPet());
-            System.out.printf("║ %-69s ║\n", " Jenis                : " + chien.getjenisPet());
-            System.out.printf("║ %-69s ║\n", " Diskon               : " + (chien.getDiskonPet() * 100) + "%");
-            System.out.printf("║ %-69s ║\n", " Tinggi               : " + chien.getTinggi());
-            System.out.printf("║ %-69s ║\n", " Rating Latihan       : " + chien.getLatihan());
+            System.out.printf("║ %-69s ║\n", " Stok                 : " + poisson.getStokPet());
+            System.out.printf("║ %-69s ║\n", " Jenis                : " + poisson.getjenisPet());
+            System.out.printf("║ %-69s ║\n", " Diskon               : " + (poisson.getDiskonPet() * 100) + "%");
+            System.out.printf("║ %-69s ║\n", " Nama Ilmiah          : " + poisson.getIlmiah());
+            System.out.printf("║ %-69s ║\n", " Suhu Air             : " + poisson.getSuhuAir());
 
-            petList.HealthRecord health = chien.getHealthRecord();
+            petList.HealthRecord health = poisson.getHealthRecord();
             System.out.printf("║ %-69s ║\n", " Pemeriksaan Terakhir : " + health.getLastCheckup());
             System.out.printf("║ %-69s ║\n", " Status Vaksin        : " + health.getVaccineStatus());
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         } else {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                [ERROR] | Data bukan tipe Anjing!!!.                   ║");
+            System.out.println("║                [ERROR] | Data bukan tipe ikan!!!.                     ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         }
     }
 
-    public static void editDoggy(Scanner scanner) {
-        displayAlldoggys();
+    public static void editIwak(Scanner scanner) {
+        displayiwak();
         System.out.print("\nMasukkan nomor pet yang ingin diedit: ");
         int index = scanner.nextInt() - 1;
         scanner.nextLine();
 
-        if (index >= 0 && index < listAnjing.size()) {
-            petList petEdit = listAnjing.get(index);
+        if (index >= 0 && index < listIkan.size()) {
+            petList petEdit = listIkan.get(index);
             boolean editing = true;
 
             while (editing) {
                 System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
                 System.out.printf("║ %-70s ║\n", "                         Mengedit pet: " + petEdit.getrasPet());
-                function.displayMenuEditDogs();
+                function.displayMenuEditFish();
                 int subPilihan = scanner.nextInt();
                 scanner.nextLine();
 
@@ -144,18 +145,17 @@ public class serviceDog {
                         petEdit.setDiskonPet(diskonBaru);
                         break;
                     case 6:
-                        if (petEdit instanceof anjing) {
-                            System.out.print("Masukkan tinggi baru: ");
-                            String tinggiBaru = scanner.nextLine();
-                            ((anjing) petEdit).setTinggi(tinggiBaru);
+                        if (petEdit instanceof ikan) {
+                            System.out.print("Masukkan nama ilmiah baru: ");
+                            String ilmiahBaru = scanner.nextLine();
+                            ((ikan) petEdit).setIlmiah(ilmiahBaru);
                         }
                         break;
                     case 7:
-                        function.displayRating();
-                        if (petEdit instanceof anjing) {
-                            System.out.print("Masukkan Rating Latihan (Copy Ratingnya): ");
-                            String latihanBaru = scanner.nextLine();
-                            ((anjing) petEdit).setLatihan(latihanBaru);
+                        if (petEdit instanceof ikan) {
+                            System.out.print("Masukkan Suhu air baru: ");
+                            String suhuBaru = scanner.nextLine();
+                            ((ikan) petEdit).setSuhuAir(suhuBaru);
                         }
                         break;
                     case 8:
@@ -193,24 +193,23 @@ public class serviceDog {
                         System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
                 }
             }
-
             System.out.println("\nSetelah mengubah data, pet menjadi:");
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
-            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail anjing " + petEdit.getrasPet());
+            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail ikan " + petEdit.getrasPet());
             System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
-            System.out.printf("║ %-69s ║\n", " Ras anjing           : " + petEdit.getrasPet());
+            System.out.printf("║ %-69s ║\n", " Ras ikan           : " + petEdit.getrasPet());
             String hargaFormatted = String.format("%, .2f", petEdit.getHargaPet()).replace(",", ".");
             System.out.printf("║ %-69s ║\n", " Harga                : Rp" + hargaFormatted);
             System.out.printf("║ %-69s ║\n", " Stok                 : " + petEdit.getStokPet());
             System.out.printf("║ %-69s ║\n", " Jenis                : " + petEdit.getjenisPet());
             System.out.printf("║ %-69s ║\n", " Diskon               : " + (petEdit.getDiskonPet() * 100) + "%");
-            if (petEdit instanceof anjing) {
-                String tinggi = ((anjing) petEdit).getTinggi();
-                System.out.printf("║ %-69s ║\n", " tinggi               : " + tinggi);
+            if (petEdit instanceof ikan) {
+                String ilmiah = ((ikan) petEdit).getIlmiah();
+                System.out.printf("║ %-69s ║\n", " Nama ilmiah          : " + ilmiah);
             }
-            if (petEdit instanceof anjing) {
-                String latihan = ((anjing) petEdit).getLatihan();
-                System.out.printf("║ %-69s ║\n", " Latihan              : " + latihan);
+            if (petEdit instanceof ikan) {
+                String suhu = ((ikan) petEdit).getSuhuAir();
+                System.out.printf("║ %-69s ║\n", " Suhu Air             : " + suhu);
             }
 
             petList.HealthRecord health = petEdit.getHealthRecord();

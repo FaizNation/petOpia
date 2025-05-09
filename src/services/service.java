@@ -1,4 +1,4 @@
-package com.example.petOpia.services;
+package services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,9 +6,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import com.example.petOpia.models.kucing;
-import com.example.petOpia.models.*;
-import com.example.petOpia.utils.*;;
+import models.kucing;
+import models.*;
+import utils.*;;
 
 
 

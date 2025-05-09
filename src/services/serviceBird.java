@@ -1,13 +1,13 @@
-package com.example.petOpia.services;
+package services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.example.petOpia.models.burung;
-import com.example.petOpia.models.petList;
-import com.example.petOpia.utils.*;
+import models.burung;
+import models.petList;
+import utils.*;
 
 
 public class serviceBird {
