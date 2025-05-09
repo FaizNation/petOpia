@@ -1,4 +1,4 @@
-package models;
+package com.example.petOpia.models;
 
 import java.time.LocalDate;
 

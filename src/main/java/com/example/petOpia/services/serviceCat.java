@@ -1,13 +1,15 @@
-package services;
+package com.example.petOpia.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import models.kucing;
-import utils.function;
-import models.petList;
+import com.example.petOpia.models.kucing;
+import com.example.petOpia.models.petList;
+import com.example.petOpia.utils.*;
+
+
 
 public class serviceCat {
     static ArrayList<kucing> listKucing = service.listKucing;

@@ -1,20 +1,21 @@
-package services;
+package com.example.petOpia.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import models.burung;
-import utils.function;
-import models.petList;
+import com.example.petOpia.models.anjing;
+import com.example.petOpia.models.petList;
+import com.example.petOpia.utils.*;
 
-public class serviceBird {
-    static ArrayList<burung> listburung = service.listBurung;
 
-    public static void displayAllbuwungs() {
+public class serviceDog {
+    static ArrayList<anjing> listAnjing = service.listAnjing;
 
-        if (listburung == null || listburung.isEmpty()) {
+    public static void displayAlldoggys() {
+
+        if (listAnjing == null || listAnjing.isEmpty()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                     Tidak ada data pet yang tersedia                  ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
@@ -28,24 +29,24 @@ public class serviceBird {
                     "No", "Ras", "Harga", "Stok", "Diskon");
             System.out.println("╠═════|═══════════════|═══════════════════|════════════|════════════════╣");
 
-            for (petList buwung : listburung) {
-                if (buwung instanceof burung) {
-                    String hargaFormatted = String.format("%, .2f", buwung.getHargaPet()).replace(",", ".");
+            for (petList doggy : listAnjing) {
+                if (doggy instanceof anjing) {
+                    String hargaFormatted = String.format("%, .2f", doggy.getHargaPet()).replace(",", ".");
                     System.out.printf("║ %-3s | %-13s | Rp%-15s | %-10d | %-3.0f%%           ║\n", i,
-                            buwung.getrasPet(), hargaFormatted, buwung.getStokPet(),
-                            buwung.getDiskonPet() * 100);
+                            doggy.getrasPet(), hargaFormatted, doggy.getStokPet(),
+                            doggy.getDiskonPet() * 100);
                     i++;
                 }
             }
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         }
+
     }
 
-    public static void displayDetailbuwung(Scanner scanner) {
+    public static void displayDetailDoggy(Scanner scanner) {
 
-        displayAllbuwungs();
-
-        if (listburung == null || listburung.isEmpty()) {
+        displayAlldoggys();
+        if (listAnjing == null || listAnjing.isEmpty()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║              [ERROR] | Tidak ada data pet yang tersedia               ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
@@ -58,63 +59,61 @@ public class serviceBird {
         if (!konfirmasi.equals("y")) {
             return;
         }
-
-        System.out.print("Masukkan nomor pet burung yang ingin dilihat: ");
+        System.out.print("Masukkan nomor pet anjing yang ingin dilihat: ");
         int pilihan = scanner.nextInt();
         scanner.nextLine();
 
-        if (pilihan < 1 || pilihan > listburung.size()) {
+        if (pilihan < 1 || pilihan > listAnjing.size()) {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║        [ERROR] | Nomor tidak tersedia. Silakan coba lagi.             ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
             return;
         }
 
-        petList petDipilih = listburung.get(pilihan - 1);
+        petList petDipilih = listAnjing.get(pilihan - 1);
 
-        if (petDipilih instanceof burung) {
-
-            burung oiseau = (burung) petDipilih;
-
+        if (petDipilih instanceof anjing) {
+            anjing chien = (anjing) petDipilih;
             function.spasi();
             function.spinnerLoading("MenCari data pet ", 2000);
-            System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
-            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail burung " + oiseau.getrasPet());
-            System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
-            System.out.printf("║ %-69s ║\n", " Ras burung           : " + oiseau.getrasPet());
-            String hargaFormatted = String.format("%, .2f", oiseau.getHargaPet()).replace(",", ".");
-            System.out.printf("║ %-69s ║\n", " Harga                : Rp" + hargaFormatted);
-            System.out.printf("║ %-69s ║\n", " Stok                 : " + oiseau.getStokPet());
-            System.out.printf("║ %-69s ║\n", " Jenis                : " + oiseau.getjenisPet());
-            System.out.printf("║ %-69s ║\n", " Diskon               : " + (oiseau.getDiskonPet() * 100) + "%");
-            System.out.printf("║ %-69s ║\n", " Berat                : " + oiseau.getBerat());
-            System.out.printf("║ %-69s ║\n", " Kicauan              : " + oiseau.getKicauan());
 
-            petList.HealthRecord health = oiseau.getHealthRecord();
+            System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
+            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail anjing " + chien.getrasPet());
+            System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
+            System.out.printf("║ %-69s ║\n", " Ras anjing           : " + chien.getrasPet());
+            String hargaFormatted = String.format("%, .2f", chien.getHargaPet()).replace(",", ".");
+            System.out.printf("║ %-69s ║\n", " Harga                : Rp" + hargaFormatted);
+            System.out.printf("║ %-69s ║\n", " Stok                 : " + chien.getStokPet());
+            System.out.printf("║ %-69s ║\n", " Jenis                : " + chien.getjenisPet());
+            System.out.printf("║ %-69s ║\n", " Diskon               : " + (chien.getDiskonPet() * 100) + "%");
+            System.out.printf("║ %-69s ║\n", " Tinggi               : " + chien.getTinggi());
+            System.out.printf("║ %-69s ║\n", " Rating Latihan       : " + chien.getLatihan());
+
+            petList.HealthRecord health = chien.getHealthRecord();
             System.out.printf("║ %-69s ║\n", " Pemeriksaan Terakhir : " + health.getLastCheckup());
             System.out.printf("║ %-69s ║\n", " Status Vaksin        : " + health.getVaccineStatus());
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         } else {
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
-            System.out.println("║                [ERROR] | Data bukan tipe burung!!!.                   ║");
+            System.out.println("║                [ERROR] | Data bukan tipe Anjing!!!.                   ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         }
     }
 
-    public static void editbuwung(Scanner scanner) {
-        displayAllbuwungs();
+    public static void editDoggy(Scanner scanner) {
+        displayAlldoggys();
         System.out.print("\nMasukkan nomor pet yang ingin diedit: ");
         int index = scanner.nextInt() - 1;
         scanner.nextLine();
 
-        if (index >= 0 && index < listburung.size()) {
-            petList petEdit = listburung.get(index);
+        if (index >= 0 && index < listAnjing.size()) {
+            petList petEdit = listAnjing.get(index);
             boolean editing = true;
 
             while (editing) {
                 System.out.println("\n╔════════════════════════════════════════════════════════════════════════╗");
                 System.out.printf("║ %-70s ║\n", "                         Mengedit pet: " + petEdit.getrasPet());
-                function.displayMenuEditbird();
+                function.displayMenuEditDogs();
                 int subPilihan = scanner.nextInt();
                 scanner.nextLine();
 
@@ -145,17 +144,18 @@ public class serviceBird {
                         petEdit.setDiskonPet(diskonBaru);
                         break;
                     case 6:
-                        if (petEdit instanceof burung) {
-                            System.out.print("Masukkan berat baru: ");
-                            String beratBaru = scanner.nextLine();
-                            ((burung) petEdit).setBerat(beratBaru);
+                        if (petEdit instanceof anjing) {
+                            System.out.print("Masukkan tinggi baru: ");
+                            String tinggiBaru = scanner.nextLine();
+                            ((anjing) petEdit).setTinggi(tinggiBaru);
                         }
                         break;
                     case 7:
-                        if (petEdit instanceof burung) {
-                            System.out.print("Masukkan Kicauan baru: ");
-                            String kicauanBaru = scanner.nextLine();
-                            ((burung) petEdit).setKicauan(kicauanBaru);
+                        function.displayRating();
+                        if (petEdit instanceof anjing) {
+                            System.out.print("Masukkan Rating Latihan (Copy Ratingnya): ");
+                            String latihanBaru = scanner.nextLine();
+                            ((anjing) petEdit).setLatihan(latihanBaru);
                         }
                         break;
                     case 8:
@@ -193,34 +193,35 @@ public class serviceBird {
                         System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
                 }
             }
+
             System.out.println("\nSetelah mengubah data, pet menjadi:");
             System.out.println("╔═══════════════════════════════════════════════════════════════════════╗");
-            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail Burung " + petEdit.getrasPet());
+            System.out.printf("║ %-69s ║\n", "  [SUCCESS] | Menampilkan Detail anjing " + petEdit.getrasPet());
             System.out.println("╠═══════════════════════════════════════════════════════════════════════╣");
-            System.out.printf("║ %-69s ║\n", " Ras burung           : " + petEdit.getrasPet());
+            System.out.printf("║ %-69s ║\n", " Ras anjing           : " + petEdit.getrasPet());
             String hargaFormatted = String.format("%, .2f", petEdit.getHargaPet()).replace(",", ".");
             System.out.printf("║ %-69s ║\n", " Harga                : Rp" + hargaFormatted);
             System.out.printf("║ %-69s ║\n", " Stok                 : " + petEdit.getStokPet());
             System.out.printf("║ %-69s ║\n", " Jenis                : " + petEdit.getjenisPet());
             System.out.printf("║ %-69s ║\n", " Diskon               : " + (petEdit.getDiskonPet() * 100) + "%");
-            if (petEdit instanceof burung) {
-                String berat = ((burung) petEdit).getBerat();
-                System.out.printf("║ %-69s ║\n", " Berat                : " + berat);
+            if (petEdit instanceof anjing) {
+                String tinggi = ((anjing) petEdit).getTinggi();
+                System.out.printf("║ %-69s ║\n", " tinggi               : " + tinggi);
             }
-            if (petEdit instanceof burung) {
-                String kicaua = ((burung) petEdit).getKicauan();
-                System.out.printf("║ %-69s ║\n", " kicauan              : " + kicaua);
+            if (petEdit instanceof anjing) {
+                String latihan = ((anjing) petEdit).getLatihan();
+                System.out.printf("║ %-69s ║\n", " Latihan              : " + latihan);
             }
 
             petList.HealthRecord health = petEdit.getHealthRecord();
             System.out.printf("║ %-69s ║\n", " Pemeriksaan Terakhir : " + health.getLastCheckup());
             System.out.printf("║ %-69s ║\n", " Status Vaksin        : " + health.getVaccineStatus());
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
+
         } else {
             System.out.println("\n╔═══════════════════════════════════════════════════════════════════════╗");
             System.out.println("║                   [ERROR] | NOMOR PET TIDAK VALID                     ║");
             System.out.println("╚═══════════════════════════════════════════════════════════════════════╝");
         }
     }
-
 }

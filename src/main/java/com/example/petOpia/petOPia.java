@@ -1,9 +1,13 @@
+package com.example.petOpia;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import models.petList;
-import services.service;
-import utils.function;
+
+import com.example.petOpia.models.petList;
+import com.example.petOpia.services.service;
+import com.example.petOpia.utils.*;
+
 
 public class petOPia {
 

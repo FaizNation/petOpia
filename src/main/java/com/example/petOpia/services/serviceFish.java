@@ -1,13 +1,14 @@
-package services;
+package com.example.petOpia.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import models.ikan;
-import utils.function;
-import models.petList;
+import com.example.petOpia.models.ikan;
+import com.example.petOpia.models.petList;
+import com.example.petOpia.utils.*;
+
 
 public class serviceFish {
     static ArrayList<ikan> listIkan = service.listIkan;

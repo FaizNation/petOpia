@@ -1,4 +1,4 @@
-package services;
+package com.example.petOpia.services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,8 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import models.*;
-import utils.function;
+import com.example.petOpia.models.kucing;
+import com.example.petOpia.models.*;
+import com.example.petOpia.utils.*;;
+
+
+
 
 public class service {
     static ArrayList<petList> listPet = new ArrayList<>();
