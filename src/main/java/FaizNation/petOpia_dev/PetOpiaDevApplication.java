@@ -9,5 +9,4 @@ public class PetOpiaDevApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PetOpiaDevApplication.class, args);
 	}
-
 }
