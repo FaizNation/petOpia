@@ -1,0 +1,83 @@
+<header th:fragment="navbar">
+
+<nav class="navbar navbar-expand-lg bg-info border border-dark border-4 shadow-brutal fixed-top">
+    <div class="container-fluid">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand mx-auto" href="#">
+            <div class="logo-wrapper">
+                <img th:src="@{/asset/logo.png}" alt="Logo" class="default-logo">
+                <img th:src="@{/asset/logo2.png}" alt="Logo Hover" class="hover-logo">
+            </div>
+        </a>
+
+        <div class="d-lg-none ms-auto me-3">
+            <a class="btn btn-outline-light border-3 btn-brutal-blue" href="#">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center w-100">
+
+                <ul class="navbar-nav d-flex flex-column flex-lg-row gap-1 align-items-start align-items-lg-center">
+                    <li class="nav-item">
+                        <a class="nav-link active text-danger" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-hover" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link-hover" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Kategori
+                        </a>
+                        <ul class="dropdown-menu shadow-brutal">
+                            <li><a class="dropdown-item nav-link-hover" href="#">All Pet</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item nav-link-hover" href="#">Kucing</a></li>
+                            <li><a class="dropdown-item nav-link-hover" href="#">Anjing</a></li>
+                            <li><a class="dropdown-item nav-link-hover" href="#">Burung</a></li>
+                            <li><a class="dropdown-item nav-link-hover" href="#">Ikan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="d-none d-lg-flex align-items-center gap-3">
+                    <div>
+                        <a class="btn btn-outline-light border-3 btn-brutal-blue" href="#">
+                            Cart <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </div>
+
+                    <div th:if="${session.loggedInUser}" class="d-flex align-items-center gap-2">
+                        <span class="navbar-text text-dark d-flex align-items-center nav-link-hover">
+                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                            <span th:text="${session.loggedInUser}">Username</span>
+                        </span>
+                        <a href="/auth/logout" class="btn btn-outline-dark border-3 btn-brutal">Logout</a>
+                    </div>
+                </div>
+
+
+                <div th:if="${session.loggedInUser}" class="d-lg-none mt-3 pt-3 border-top">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="navbar-text text-dark d-flex align-items-center nav-link-hover">
+                            <i class="bi bi-person-circle fs-4 me-2"></i>
+                            <span th:text="${session.loggedInUser}">Username</span>
+                        </span>
+                        <a href="/auth/logout" class="btn btn-outline-dark border-3 btn-brutal">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+</header>

@@ -1,0 +1,155 @@
+body {
+    padding-top: 100px;
+    font-family: 'Fredoka One', cursive;
+}
+
+.logo-wrapper {
+    position: relative;
+    width: 150px;
+    height: auto;
+    display: inline-block;
+}
+
+.logo-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.logo-wrapper img.hover-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.logo-wrapper:hover img.hover-logo {
+    opacity: 1;
+}
+
+.logo-wrapper:hover img.default-logo {
+    opacity: 0;
+}
+
+.shadow-brutal {
+    box-shadow: 6px 6px 0 #000 !important;
+}
+
+.btn-brutal {
+    background-color: #ff5ca8;
+    color: black;
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    transition: all 0.15s ease-in-out;
+    font-family: 'Fredoka One', cursive;
+}
+
+.btn-brutal:hover,
+.btn-brutal:focus {
+    box-shadow: 2px 2px 0 black;
+    transform: translate(2px, 2px);
+}
+
+.btn-brutal:active {
+    box-shadow: inset 2px 2px 0 black;
+    transform: translate(1px, 1px);
+}
+
+.btn-brutal-blue {
+    background-color: #0066ff;
+    color: black;
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0 black;
+    transition: all 0.15s ease-in-out;
+    font-family: 'Fredoka One', cursive;
+}
+
+.btn-brutal-blue:hover,
+.btn-brutal:focus {
+    box-shadow: 2px 2px 0 black;
+    transform: translate(2px, 2px);
+}
+
+.btn-brutal-blue:active {
+    box-shadow: inset 2px 2px 0 black;
+    transform: translate(1px, 1px);
+}
+
+.nav-link-hover {
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link-hover:hover {
+    color: #ff007f !important;
+}
+
+.nav-link-active {
+    color: #ff5ca8;
+}
+
+.footer {
+    font-family: 'Fredoka One', sans-serif;
+    position: relative;
+    bottom: -130px;
+    width: 100%;
+    z-index: 1000;
+}
+
+.footer a:hover {
+    color: #ffffff !important;
+}
+
+.background-section {
+    background:
+        url('/asset/background.png');
+    background-size: 300px ;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    border-radius: 20px;
+    margin: 40px auto;
+
+}
+
+
+main {
+    padding: 1.5rem;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        padding: 1rem;
+        background-color: rgba(23, 162, 184, 0.95);
+        border: 4px solid #212529;
+        margin-top: 0.5rem;
+    }
+
+    .navbar-nav {
+        width: 100%;
+    }
+
+    .nav-item {
+        width: 100%;
+    }
+
+    .nav-link,
+    .dropdown-item {
+        padding: 0.75rem 1rem;
+    }
+
+    .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        border: 3px solid #212529;
+        margin-top: 0.5rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .navbar-toggler {
+        order: -1;
+    }
+}
