@@ -2,26 +2,119 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>PetOpia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetOpia</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <link rel="stylesheet" th:href="@{/css/hero.css}" />
 </head>
 
 <body>
-    <div th:replace="~{fragments/navbar :: navbar}"></div>
-    <div class="background-section">
-    
-    <div class="content px-5 py-4">
-        <h1>Selamat Datang</h1>
-        <p>Tunggu bang belom jadi ini...</p>
+  <div th:replace="~{fragments/navbar :: navbar}"></div>
+  <div class="background-section">
+
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="fw-normal">Selamat Datang di </h1>
+        <h1 class="brand ">PetOpia</h1>
+        <p class="subtitle">Temukan sahabat terbaikmu</p>
+        <div class="hero-buttons btn-primary btn-lg">
+          <a href="#" class="btn btn-primary btn-lg btn-brutal-biru text-light">Explore →</a>
+          <a href="#" class="btn btn-primary btn-lg btn-brutal-white">Shop Now</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="/asset/hero.png" alt="Hero Pet Image" />
+      </div>
+    </section>
+
+    <section class="about-section container" id="about">
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center">
+          <img src="/asset/about.png" alt="About Petopia" class="about-img" />
+        </div>
+        <div class="col-md-6">
+          <h2 class="about-title text-center">About us</h2>
+          <p class="about-text">
+            PetOpia adalah platform jual beli hewan peliharaan yang aman, terpercaya, dan mudah digunakan. Kami
+            menghubungkan pecinta hewan para hewan, memastikan setiap hewan mendapat rumah yang penuh kasih. Temukan
+            sahabat terbaikmu disini!
+          </p>
+        </div>
+      </div>
+    </section>
+
+<section class="ShopPet">
+<div class="shop-by-pet text-center py-5">
+      <h2 class="section-title">Shop by Pet</h2>
+      <div class="d-flex justify-content-center flex-wrap gap-4 mt-4">
+        <div class="pet-icon">
+          <img src="/asset/icon-kucing.png" alt="Kucing">
+          <p>Kucing</p>
+        </div>
+        <div class="pet-icon">
+          <img src="/asset/icon-anjing.png" alt="Anjing">
+          <p>Anjing</p>
+        </div>
+        <div class="pet-icon">
+          <img src="/asset/icon-burung.png" alt="Burung">
+          <p>Burung</p>
+        </div>
+        <div class="pet-icon">
+          <img src="/asset/icon-ikan.png" alt="Ikan">
+          <p>Ikan</p>
+        </div>
+      </div>
     </div>
-    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <div class="py-5 text-center">
+      <h2 class="section-title">All Paw’s Sale</h2>
+      <div class="d-flex flex-wrap justify-content-center gap-4 mt-4">
+
+        <!-- Card -->
+        <div class="pet-card pink">
+          <div class="discount-badge">5%</div>
+          <img src="/asset/kucing1.jpg" alt="Anggora">
+          <h5>Anggora</h5>
+          <p class="price">
+            <span class="discounted">Rp20.000.00000</span>
+            <span class="original">Rp25.000.000</span>
+          </p>
+          <p>Stock : 5 ekor</p>
+          <button class="btn-buy">Buy <i class="fa-solid fa-bag-shopping"></i></button>
+        </div>
+
+        <!-- Duplikat Card (contoh) -->
+        <div class="pet-card blue">
+          <div class="discount-badge">5%</div>
+          <img src="/asset/anjing1.jpg" alt="Anggora">
+          <h5>Anggora</h5>
+          <p class="price">
+            <span class="discounted">Rp20.000.00000</span>
+            <span class="original">Rp25.000.000</span>
+          </p>
+          <p>Stock : 5 ekor</p>
+          <button class="btn-buy">Buy <i class="fa-solid fa-bag-shopping"></i></button>
+        </div>
+
+        <!-- Tambahkan lebih banyak card sesuai kebutuhan -->
+
+      </div>
+
+      <div class="mt-4">
+        <a href="/pets" class="btn-more">more <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+</section>
+    
+
+    <div th:replace=" ~{fragments/footer :: footer}">
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
