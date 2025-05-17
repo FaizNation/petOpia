@@ -243,125 +243,98 @@ body {
 
 }
 
-.ShopPet {
-    background: url('/asset/Kategori1.png');
-    background-size: 100% 100%;
-
+.info-cards {
+  padding: 30px 0;
+  background: #ffffff;
 }
 
-.shop-by-pet,
-.all-paws-sale {
-  background: transparent;
-}
-
-.section-title {
-  font-size: 2rem;
-  font-weight: bold;
-  
-}
-
-.pet-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  border: 4px solid #000;
-  border-radius: 50%;
-  padding: 20px;
-  width: 100px;
-  height: 100px;
-  box-shadow: 4px 4px 0px #000;
-  transition: transform 0.3s;
-}
-
-.pet-icon img {
-  width: 40px;
-  height: 40px;
-}
-
-.pet-icon p {
-  margin-top: 8px;
-  font-weight: bold;
-}
-
-.pet-icon:hover {
-  transform: scale(1.1);
-}
-
-.pet-card {
-  width: 200px;
-  border: 4px solid #000;
-  box-shadow: 4px 4px 0px #000;
-  border-radius: 10px;
-  padding: 10px;
+.info-cards .info-card {
+  padding: 20px 15px;
+  height: 100%;
+  transition: transform 0.3s ease;
   text-align: center;
-  position: relative;
 }
 
-.pet-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.info-cards .info-card:hover {
+  transform: translateY(-5px);
 }
 
-.pet-card h5 {
+.info-cards .info-card:hover .icon-box i {
+  color: var(--accent-color);
+}
+
+.info-cards .info-card .icon-box {
+  margin: 0 auto 15px;
+  transition: all 0.3s ease;
+}
+
+.info-cards .info-card .icon-box i {
+  font-size: 2.5rem;
+  color: var(--heading-color);
+  transition: color 0.3s ease;
+}
+
+.info-cards .info-card h3 {
   font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.pet-card .price {
+  font-weight: 600;
   margin-bottom: 10px;
+  color: var(--heading-color);
 }
 
-.pet-card .discounted {
-  color: black;
-  font-weight: bold;
-}
-
-.pet-card .original {
-  color: #888;
-  text-decoration: line-through;
-  margin-left: 5px;
-}
-
-.btn-buy {
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  font-weight: bold;
-  box-shadow: 3px 3px 0px #000;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-buy i {
-  margin-left: 5px;
-}
-
-.discount-badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: #ff69b4;
-  color: white;
-  font-weight: bold;
-  padding: 4px 6px;
-  border-radius: 50%;
-  border: 3px solid #000;
-  box-shadow: 2px 2px 0px #000;
+.info-cards .info-card p {
   font-size: 0.9rem;
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
+  line-height: 1.5;
+  margin-bottom: 0;
 }
 
-.pet-card.pink {
-  background-color: #ffc0cb;
+@media (max-width: 991px) {
+  .info-cards .info-card .icon-box i {
+    font-size: 2.2rem;
+  }
+
+  .info-cards .info-card h3 {
+    font-size: 1rem;
+  }
+
+  .info-cards .info-card p {
+    font-size: 0.85rem;
+  }
 }
 
-.pet-card.blue {
-  background-color: #90e0f0;
+@media (max-width: 767px) {
+  .info-cards .info-card {
+    margin-bottom: 15px;
+  }
 }
+
+.categories {
+    background: url('/asset/background-Kategori.png') no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh; /* full height of the screen */
+}
+
+.categories-img {
+    border: 3px solid #000000;
+    box-shadow: 6px 6px 0 #000000;
+    transition: all 0.15s ease-in-out;
+    font-family: 'Fredoka One', cursive;
+}
+
+.categories-img:hover,
+.categories:focus {
+    background-color: #000000;
+    box-shadow: 2px 2px 0 #000000;
+    transform: translate(2px, 2px);
+    border: 3px solid #000000;
+}
+
+.categories:active {
+    box-shadow: inset 2px 2px 0 #0066ff;
+    transform: translate(1px, 1px);
+}
+
 
 
 .footer {
