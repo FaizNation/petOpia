@@ -1,13 +1,13 @@
-package FaizNation.petOpia_dev.services;
+package FaizNation.petopia_dev.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FaizNation.petOpia_dev.models.burung;
-import FaizNation.petOpia_dev.models.petList;
-import FaizNation.petOpia_dev.utils.function;
+import FaizNation.petopia_dev.models.burung;
+import FaizNation.petopia_dev.models.petList;
+import FaizNation.petopia_dev.utils.function;
 
 public class serviceBird {
     static ArrayList<burung> listburung = services.listBurung;

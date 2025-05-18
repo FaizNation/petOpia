@@ -1,12 +1,12 @@
-package FaizNation.petOpia_dev;
+package FaizNation.petopia_dev;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import FaizNation.petOpia_dev.models.*;
-import FaizNation.petOpia_dev.utils.*;
-import FaizNation.petOpia_dev.services.*;
+import FaizNation.petopia_dev.models.petList;
+import FaizNation.petopia_dev.services.services;
+import FaizNation.petopia_dev.utils.function;
 
 public class petOPia {
 

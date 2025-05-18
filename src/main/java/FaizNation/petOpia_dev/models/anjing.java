@@ -1,4 +1,4 @@
-package FaizNation.petOpia_dev.models;
+package FaizNation.petopia_dev.models;
 
 import java.time.LocalDate;
 

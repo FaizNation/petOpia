@@ -1,4 +1,4 @@
-package FaizNation.petOpia_dev;
+package FaizNation.petopia_dev;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

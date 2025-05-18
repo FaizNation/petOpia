@@ -1,4 +1,4 @@
-package FaizNation.petOpia_dev.utils;
+package FaizNation.petopia_dev.utils;
 
 public class function {
     public static void displayJudul() {
