@@ -1,9 +1,9 @@
+/* Base Styles */
 body {
     padding-top: 60px;
     font-family: 'Fredoka One', cursive;
     background: url('/asset/background.png') no-repeat center center;
     background-size: 80rem auto;
-    /* Ganti 200px sesuai ukuran yang kamu inginkan */
     background-attachment: fixed;
     margin: 40px auto;
 }
@@ -149,7 +149,6 @@ body {
     position: relative;
 }
 
-/* Left content */
 .hero-content h1 {
     font-size: 4rem;
     color: black;
@@ -160,7 +159,6 @@ body {
 .hero-content .brand {
     size: 12px;
     color: #ff6ec7;
-    /* Pink */
 }
 
 .subtitle {
@@ -192,14 +190,11 @@ body {
     filter: brightness(1);
 }
 
-/* Tambahan efek "hover" otomatis */
 .pet-image.hovered {
     transform: scale(1.05);
     filter: brightness(1.2);
 }
 
-
-/* Keyframes animasi masuk */
 @keyframes heroEntrance {
     0% {
         transform: scale(0.9) translateY(20px);
@@ -216,7 +211,6 @@ body {
     margin: 60px auto;
     padding: 40px;
     background-image: url('/img/grid-bg.png');
-    /* jika kamu ingin grid seperti di gambar */
     background-size: contain;
     background-repeat: repeat;
 }
@@ -234,85 +228,74 @@ body {
     margin-bottom: 3rem;
 }
 
-
 .about-text {
     font-family: 'Freodoka One', cursive;
     font-size: 2rem;
     text-align: justify;
     padding-left: 10px;
-
 }
 
 .info-cards {
-  padding: 30px 0;
-  background: #ffffff;
+    padding: 30px 0;
+    background: #ffffff;
 }
 
 .info-cards .info-card {
-  padding: 20px 15px;
-  height: 100%;
-  transition: transform 0.3s ease;
-  text-align: center;
+    padding: 20px 15px;
+    height: 100%;
+    transition: transform 0.3s ease;
+    text-align: center;
 }
 
 .info-cards .info-card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .info-cards .info-card:hover .icon-box i {
-  color: var(--accent-color);
+    color: var(--accent-color);
 }
 
 .info-cards .info-card .icon-box {
-  margin: 0 auto 15px;
-  transition: all 0.3s ease;
+    margin: 0 auto 15px;
+    transition: all 0.3s ease;
 }
 
 .info-cards .info-card .icon-box i {
-  font-size: 2.5rem;
-  color: var(--heading-color);
-  transition: color 0.3s ease;
+    font-size: 2.5rem;
+    color: var(--heading-color);
+    transition: color 0.3s ease;
 }
 
 .info-cards .info-card h3 {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-  color: var(--heading-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--heading-color);
 }
 
 .info-cards .info-card p {
-  font-size: 0.9rem;
-  color: color-mix(in srgb, var(--default-color), transparent 20%);
-  line-height: 1.5;
-  margin-bottom: 0;
-}
-
-@media (max-width: 991px) {
-  .info-cards .info-card .icon-box i {
-    font-size: 2.2rem;
-  }
-
-  .info-cards .info-card h3 {
-    font-size: 1rem;
-  }
-
-  .info-cards .info-card p {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .info-cards .info-card {
-    margin-bottom: 15px;
-  }
+    font-size: 0.9rem;
+    color: color-mix(in srgb, var(--default-color), transparent 20%);
+    line-height: 1.5;
+    margin-bottom: 0;
 }
 
 .categories {
     background: url('/asset/background-Kategori.png') no-repeat center center;
     background-size: cover;
     width: 100%;
-    height: 100vh; /* full height of the screen */
+    height: 150vh;
+}
+
+.kategori-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.paws-sale {
+    font-size: 2rem;
+    font-weight: normal;
 }
 
 .categories-img {
@@ -335,7 +318,135 @@ body {
     transform: translate(1px, 1px);
 }
 
+.owl-slider {
+    padding: 2rem;
+}
 
+.item {
+    position: relative;
+    background-color: #fff;
+    border: 4px solid #000;
+    border-radius: 16px;
+    padding: 1rem;
+    margin: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 6px 6px 0 #000;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0 #000;
+}
+
+.item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border: 3px solid #000;
+    border-radius: 12px;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.item h4,
+.item h5 {
+    margin: 10px 0 0;
+    font-weight: bold;
+    color: #000;
+}
+
+.item h5 {
+    font-size: 1rem;
+    color: #e91e63;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    padding: 6px 12px;
+    border: 3px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    font-size: 0.9rem;
+    z-index: 10;
+    border-radius: 6px;
+}
+
+.owl-nav button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff !important;
+    border: 3px solid #000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 2rem;
+    color: #000;
+    box-shadow: 4px 4px 0 #000;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.owl-nav button.owl-prev {
+    left: -25px;
+}
+
+.owl-nav button.owl-next {
+    right: -25px;
+}
+
+.owl-nav button:focus {
+    outline: none;
+}
+
+.owl-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.owl-dot {
+    background: #000 !important;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: all 0.3s ease;
+}
+
+.owl-dot.active {
+    background: #e91e63 !important;
+    border-color: #000;
+}
+
+.instagram-item:hover:before,
+.instagram-item:hover .icon-overlay {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.icon-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    align-items: center;
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0;
+    transition: 0.8s ease;
+}
 
 .footer {
     font-family: 'Fredoka One', sans-serif;
@@ -349,23 +460,65 @@ body {
     color: #ffffff !important;
 }
 
-body {
-    background: url('/asset/background.png') no-repeat center center;
-    background-size: 80rem auto;
-    /* Ganti 200px sesuai ukuran yang kamu inginkan */
-    background-attachment: fixed;
-    margin: 40px auto;
+/* Responsive Styles */
+@media (max-width: 1200px) {
+    .hero-content h1 {
+        font-size: 3.5rem;
+        margin-left: 50px;
+    }
 
+    .subtitle {
+        font-size: 2rem;
+        margin-left: 50px;
+    }
 
-}
+    .hero-buttons {
+        gap: 100px;
+        margin-left: 50px;
+    }
 
-
-
-main {
-    padding: 1.5rem;
+    .hero-image img {
+        max-width: 30rem;
+    }
 }
 
 @media (max-width: 991.98px) {
+    .hero-section {
+        flex-direction: column;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .hero-content h1,
+    .subtitle {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        margin-left: 0;
+        gap: 50px;
+    }
+
+    .hero-image img {
+        margin-right: 0;
+        margin-top: 30px;
+    }
+
+    .about-title {
+        font-size: 3rem;
+    }
+
+    .about-text {
+        font-size: 1.5rem;
+    }
+
+    .categories {
+        height: auto;
+        padding: 60px 0;
+    }
+
     .navbar-collapse {
         padding: 1rem;
         background-color: rgba(23, 162, 184, 0.95);
@@ -391,6 +544,94 @@ main {
         transform: none !important;
         border: 3px solid #212529;
         margin-top: 0.5rem;
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .about-title {
+        font-size: 2.5rem;
+    }
+
+    .about-text {
+        font-size: 1.2rem;
+    }
+
+    .kategori-title {
+        font-size: 2rem;
+    }
+
+    .paws-sale {
+        font-size: 1.5rem;
+    }
+
+    .item img {
+        height: 150px;
+    }
+
+    .owl-nav button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        padding-top: 50px;
+        margin: 20px auto;
+    }
+
+    .logo-wrapper {
+        width: 120px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .about-title {
+        font-size: 2rem;
+    }
+
+    .about-text {
+        font-size: 1rem;
+    }
+
+    .info-cards .info-card .icon-box i {
+        font-size: 2rem;
+    }
+
+
+    .item {
+        padding: 0.5rem;
+        margin: 0.5rem;
+    }
+
+    .item img {
+        height: 120px;
+    }
+
+    .footer {
+        bottom: -80px;
     }
 }
 
