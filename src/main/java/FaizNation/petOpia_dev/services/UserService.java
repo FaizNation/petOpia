@@ -1,27 +1,24 @@
-package FaizNation.petopia_dev.services;
+package FaizNation.petOpia_dev.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import FaizNation.petopia_dev.models.User;
-import FaizNation.petopia_dev.repository.UserRepository;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
+    private final Map<String, String> users = new HashMap<>();
 
     public boolean register(String username, String password) {
-        if (userRepository.findByUsername(username) != null) {
+        if (users.containsKey(username)) {
             return false; // Username already exists
         }
-        User user = new User(username, password);
-        userRepository.save(user);
+        users.put(username, password);
         return true;
     }
 
     public boolean login(String username, String password) {
-        User user = userRepository.findByUsername(username);
-        return user != null && user.getPassword().equals(password);
+        return users.containsKey(username) && users.get(username).equals(password);
     }
 }

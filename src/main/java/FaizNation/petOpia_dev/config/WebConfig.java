@@ -1,4 +1,4 @@
-package FaizNation.petopia_dev.config;
+package FaizNation.petOpia_dev.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

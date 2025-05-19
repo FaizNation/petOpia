@@ -1,13 +1,13 @@
-package FaizNation.petopia_dev.services;
+package FaizNation.petOpia_dev.services;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import FaizNation.petopia_dev.models.kucing;
-import FaizNation.petopia_dev.models.petList;
-import FaizNation.petopia_dev.utils.function;
+import FaizNation.petOpia_dev.models.kucing;
+import FaizNation.petOpia_dev.models.petList;
+import FaizNation.petOpia_dev.utils.function;
 
 public class serviceCat {
    static ArrayList<kucing> listKucing = services.listKucing;
