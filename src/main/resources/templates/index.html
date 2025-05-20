@@ -1,330 +1,307 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <!DOCTYPE html>
+  <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetOpia</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetOpia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css'>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
 
-<body>
-  <div th:replace="~{fragments/navbar :: navbar}"></div>
-  <div class="background-section">
-
-    <section class="hero-section">
-      <div class="hero-content">
-        <h1 class="fw-normal">Selamat Datang di </h1>
-        <h1 class="brand ">PetOpia</h1>
-        <p class="subtitle">Temukan sahabat terbaikmu</p>
-        <div class="hero-buttons btn-primary btn-lg">
-          <a href="#" class="btn btn-primary btn-lg btn-brutal-biru text-light">Explore →</a>
-          <a href="#" class="btn btn-primary btn-lg btn-brutal-white">Shop Now</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        <img src="/asset/hero.png" alt="Hero Pet Image" />
-      </div>
-    </section>
-
-    <section class="about-section container" id="about">
-      <div class="row align-items-center">
-        <div class="col-md-6 text-center">
-          <img src="/asset/about.png" alt="About Petopia" class="about-img" />
-        </div>
-        <div class="col-md-6">
-          <h2 class="about-title text-center">About us</h2>
-          <p class="about-text">
-            PetOpia adalah platform jual beli hewan peliharaan yang aman, terpercaya, dan mudah digunakan. Kami
-            menghubungkan pecinta hewan para hewan, memastikan setiap hewan mendapat rumah yang penuh kasih. Temukan
-            sahabat terbaikmu disini!
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="info-cards" class="info-cards section light-background">
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row g-4 justify-content-center">
-          <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
-            <div class="info-card text-center">
-              <div class="icon-box">
-                <i class="bi bi-truck"></i>
-              </div>
-              <h3>Gratis Ongkir</h3>
-              <p>Pokoknya beli di sini dapet free ongkir, gak pake ribet! Barang langsung meluncur ke rumah</p>
-            </div>
+  <body>
+    <!-- ALERT MODAL -->
+    <div class="modal fade" id="pawsSaleAlertModal" tabindex="-1" aria-labelledby="pawsSaleAlertLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title" id="pawsSaleAlertLabel">Tidak Tersedia</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
-            <div class="info-card text-center">
-              <div class="icon-box">
-                <i class="bi bi-piggy-bank"></i>
-              </div>
-              <h3>Garansi Uang Kembali</h3>
-              <p>Barang gak cocok? Tenang aja bro/sis, bisa balik duitnya. Aman kayak di pelukan mantan (eh).</p>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
-            <div class="info-card text-center">
-              <div class="icon-box">
-                <i class="bi bi-percent"></i>
-              </div>
-              <h3>Diskon Gede-gedean</h3>
-              <p>Diskon di sini gak ngotak! Harga miring, kualitas tetap paling keren. Cuan maksimal!</p>
-            </div>
-          </div>
-          <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
-            <div class="info-card text-center">
-              <div class="icon-box">
-                <i class="bi bi-headset"></i>
-              </div>
-              <h3>Layanan 24/7</h3>
-              <p>Butuh bantuan? Kita standby 24 jam non-stop! Chat aja, dijamin fast respon kayak mantan balikan.</p>
-            </div>
+          <div class="modal-body text-center">
+            <img id="pawsSaleModalImg" src="" alt="Pet" class="img-fluid rounded mb-3" style="max-height:200px;">
+            <div id="pawsSaleModalText">Item ini tidak tersedia lagi karena sudah habis stok.</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <section class="categories" id="categories">
-        <div class="container my-3 py-5">
-          <div class="row my-5">
-            <h3 class="kategori-title text-center">Kategoriews</h3>
-            <div class="col text-center">              <a href="/shop/all-pet?category=Kucing" class="categories-item text-decor text-decoration-none text-dark">
-                <img src="/asset/cat.png" class="categories-img rounded-circle img-fluid w-50" alt="cat">
-                <h5 class="mt-3">Cat Shop</h5>
-              </a>
-            </div>
-            <div class="col text-center">
-              <a href="/shop/all-pet?category=Anjing" class="categories-item text-decor text-decoration-none text-dark">
-                <img src="/asset/dog.png" class="categories-img rounded-circle img-fluid w-50" alt="dog">
-                <h5 class="mt-3">Dog Shop</h5>
-              </a>
-            </div>
-            <div class="col text-center">
-              <a href="/shop/all-pet?category=Burung" class="categories-item text-decor text-decoration-none text-dark">
-                <img src="/asset/bird.png" class="categories-img rounded-circle img-fluid w-50" alt="bird">
-                <h5 class="mt-3">Bird Shop</h5>
-              </a>
-            </div>
-            <div class="col text-center">
-              <a href="/shop/all-pet?category=Ikan" class="categories-item text-decor text-decoration-none text-dark">
-                <img src="/asset/fish.png" class="categories-img rounded-circle img-fluid w-50" alt="fish">
-                <h5 class="mt-3">Fish Shop</h5>
-              </a>
-            </div>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <div class="background-section">
 
-            <div class="owl-slider">
-              <h5 class="paws-sale text-left">Paw's Sale</h5>
-              <div id="carousel" class="owl-carousel">
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://i.pinimg.com/736x/55/11/0a/55110a68ce48355c7ae3cf31d769c9ac.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">KUCING SPESIAL BAKEKOK</h5>
-                  <h6 class="text-center">Rp.10.000.000</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://i.pinimg.com/736x/38/23/15/382315cf7f7dd697146533ea538db3a8.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">Kucing Hapis</h5>
-                  <h6 class="text-center">cepuluh juta</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="fw-normal">Selamat Datang di </h1>
+          <h1 class="brand ">PetOpia</h1>
+          <p class="subtitle">Temukan sahabat terbaikmu</p>
+          <div class="hero-buttons btn-primary btn-lg">
+            <a href="#" class="btn btn-primary btn-lg btn-brutal-biru text-light">Explore →</a>
+            <a href="/shop/all-pet" class="btn btn-primary btn-lg btn-brutal-white">Shop Now</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="/asset/hero.png" alt="Hero Pet Image" />
+        </div>
+      </section>
 
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-                <div class="item">
-                  <div class="discount-badge">30%</div>
-                  <a href="#">
-                    <img src="https://cdn.pixabay.com/photo/2021/03/13/10/23/hut-6091451_1280.jpg"
-                      class="img-responsive center-block">
-                  </a>
-                  <h5 class="text-center">MAYORAL KOŠULJA</h5>
-                  <h6 class="text-center">800 TK</h6>
-                </div>
-              </div>
-            </div>
-            <div class="text-center">
-              <a href="#" class="btn btn-primary btn-lg btn-brutal-white">More →</a>
-            </div>
+      <section class="about-section container" id="about">
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center">
+            <img src="/asset/about.png" alt="About Petopia" class="about-img" />
+          </div>
+          <div class="col-md-6">
+            <h2 class="about-title text-center">About us</h2>
+            <p class="about-text">
+              PetOpia adalah platform jual beli hewan peliharaan yang aman, terpercaya, dan mudah digunakan. Kami
+              menghubungkan pecinta hewan para hewan, memastikan setiap hewan mendapat rumah yang penuh kasih. Temukan
+              sahabat terbaikmu disini!
+            </p>
           </div>
         </div>
       </section>
 
-      <section id="insta" class="my-5">
-    <div class="row g-0 py-5">
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/beeena4" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
+      <section id="info-cards" class="info-cards section light-background">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row g-4 justify-content-center">
+            <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="info-card text-center">
+                <div class="icon-box">
+                  <i class="bi bi-truck"></i>
+                </div>
+                <h3>Gratis Ongkir</h3>
+                <p>Pokoknya beli di sini dapet free ongkir, gak pake ribet! Barang langsung meluncur ke rumah</p>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+              <div class="info-card text-center">
+                <div class="icon-box">
+                  <i class="bi bi-piggy-bank"></i>
+                </div>
+                <h3>Garansi Uang Kembali</h3>
+                <p>Barang gak cocok? Tenang aja bro/sis, bisa balik duitnya. Aman kayak di pelukan mantan (eh).</p>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+              <div class="info-card text-center">
+                <div class="icon-box">
+                  <i class="bi bi-percent"></i>
+                </div>
+                <h3>Diskon Gede-gedean</h3>
+                <p>Diskon di sini gak ngotak! Harga miring, kualitas tetap paling keren. Cuan maksimal!</p>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+              <div class="info-card text-center">
+                <div class="icon-box">
+                  <i class="bi bi-headset"></i>
+                </div>
+                <h3>Layanan 24/7</h3>
+                <p>Butuh bantuan? Kita standby 24 jam non-stop! Chat aja, dijamin fast respon kayak mantan balikan.</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <a href="#">
-          <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/Apissr" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="https://www.instagram.com/mhafizhsr_/" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
-        </div>
-        <a href="#">
-          <img src="/asset/hapis-img.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/beeena4" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
-        </div>
-        <a href="#">
-          <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/beeena4" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="/asset/persia.png" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
-        </div>
-        <a href="#">
-          <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/beeena4" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
-        </div>
-        <a href="#">
-          <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/beeena4" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
-        </div>
-        <a href="#">
-          <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <a href="https://github.com/beeena4" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:github"></iconify-icon>
-          </a>
-          <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
-            <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-          </a>
-        </div>
-        <a href="https://github.com/beeena4">
-          <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-    </div>
-  </section>
+
+        <section class="categories" id="categories">
+          <div class="container my-3 py-5">
+            <div class="row my-5">
+              <h3 class="kategori-title text-center">Kategoriews</h3>
+              <div class="col text-center"> <a href="/shop/all-pet?category=Kucing"
+                  class="categories-item text-decor text-decoration-none text-dark">
+                  <img src="/asset/cat.png" class="categories-img rounded-circle img-fluid w-50" alt="cat">
+                  <h5 class="mt-3">Cat Shop</h5>
+                </a>
+              </div>
+              <div class="col text-center">
+                <a href="/shop/all-pet?category=Anjing" class="categories-item text-decor text-decoration-none text-dark">
+                  <img src="/asset/dog.png" class="categories-img rounded-circle img-fluid w-50" alt="dog">
+                  <h5 class="mt-3">Dog Shop</h5>
+                </a>
+              </div>
+              <div class="col text-center">
+                <a href="/shop/all-pet?category=Burung" class="categories-item text-decor text-decoration-none text-dark">
+                  <img src="/asset/bird.png" class="categories-img rounded-circle img-fluid w-50" alt="bird">
+                  <h5 class="mt-3">Bird Shop</h5>
+                </a>
+              </div>
+              <div class="col text-center">
+                <a href="/shop/all-pet?category=Ikan" class="categories-item text-decor text-decoration-none text-dark">
+                  <img src="/asset/fish.png" class="categories-img rounded-circle img-fluid w-50" alt="fish">
+                  <h5 class="mt-3">Fish Shop</h5>
+                </a>
+              </div>
+
+              <div class="owl-slider">
+                <h5 class="paws-sale text-left">Paw's Sale</h5>
+                <div id="carousel" class="owl-carousel">
+                  <div class="item">
+                    <div class="discount-badge">limited</div>
+                    <a href="#" class="paws-sale-link" data-nama="KUCING SPESIAL BAKEKOK" data-harga="Rp.10.000.000"
+                      data-img="https://i.pinimg.com/736x/55/11/0a/55110a68ce48355c7ae3cf31d769c9ac.jpg"
+                      data-alert="Item ini tidak tersedia lagi karena sudah habis stok.">
+                      <img src="https://i.pinimg.com/736x/55/11/0a/55110a68ce48355c7ae3cf31d769c9ac.jpg"
+                        class="img-responsive center-block">
+                    </a>
+                    <h5 class="text-center">KUCING SPESIAL BAKEKOK</h5>
+                    <h6 class="text-center">Rp.10.000.000</h6>
+                  </div>
+                  <div class="item">
+                    <div class="discount-badge">30%</div>
+                    <a href="#" class="paws-sale-link" data-nama="Kucing Hapis" data-harga="cepuluh juta"
+                      data-img="https://i.pinimg.com/736x/38/23/15/382315cf7f7dd697146533ea538db3a8.jpg"
+                      data-alert="Sudah tidak tersedia, silakan cari produk lain.">
+                      <img src="https://i.pinimg.com/736x/38/23/15/382315cf7f7dd697146533ea538db3a8.jpg"
+                        class="img-responsive center-block">
+                    </a>
+                    <h5 class="text-center">Kucing Hapis</h5>
+                    <h6 class="text-center">cepuluh juta</h6>
+                  </div>
+                  <div class="item">
+                    <div class="discount-badge">30%</div>
+                    <a href="#" class="paws-sale-link" data-nama="Tripi Tropi Tropa Tripi" data-harga="$ERROR$"
+                      data-img="https://i.pinimg.com/736x/fc/f5/56/fcf556991a632dbbde86d7ef572a2672.jpg"
+                      data-alert="tripi😹tropi🥺tropa😱tripa👿tretropi🥰trepatrela🥶tratombuli👹tretraki🫰🏻triplikando😨tropoline💋troplikali😊ekitroplakuele👹nulatripa🗣️🗣️">
+                      <img src="https://i.pinimg.com/736x/fc/f5/56/fcf556991a632dbbde86d7ef572a2672.jpg"
+                        class="img-responsive center-block">
+                    </a>
+                    <h5 class="text-center">Tripi Tropi Tropa Tripi</h5>
+                    <h6 class="text-center">$ERROR$</h6>
+                  </div>
+                  <div class="item">
+                    <div class="discount-badge">30%</div>
+                    <a href="#" class="paws-sale-link" data-nama="MAYORAL KOŠULJA" data-harga="800 TK"
+                      data-img="https://i.redd.it/tfzcam3xxuie1.png" data-alert="Produk ini sudah tidak dapat dibeli.">
+                      <img src="https://i.redd.it/tfzcam3xxuie1.png" class="img-responsive center-block">
+                    </a>
+                    <h5 class="text-center">MAYORAL KOŠULJA</h5>
+                    <h6 class="text-center">800 TK</h6>
+                  </div>
+                  <div class="item">
+                    <div class="discount-badge">30%</div>
+                    <a href="#" class="paws-sale-link" data-nama="MAYORAL KOŠULJA" data-harga="800 TK"
+                      data-img="https://i.pinimg.com/736x/17/08/f8/1708f84356137fc5ee8d80c5d8e7084b.jpg" data-alert="Produk ini sudah tidak dapat dibeli.">
+                      <img src="https://i.pinimg.com/736x/17/08/f8/1708f84356137fc5ee8d80c5d8e7084b.jpg" class="img-responsive center-block">
+                    </a>
+                    <h5 class="text-center">MAYORAL KOŠULJA</h5>
+                    <h6 class="text-center">800 TK</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <a href="/shop/all-pet" class="btn btn-primary btn-lg btn-brutal-white">Cari yang Ori? →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="insta" class="my-5">
+          <div class="row g-0 py-5">
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/beeena4" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="#">
+                <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/Apissr" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="https://www.instagram.com/mhafizhsr_/" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="#">
+                <img src="/asset/hapis-img.jpg" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/beeena4" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="#">
+                <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/beeena4" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="/asset/persia.png" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="#">
+                <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/beeena4" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="#">
+                <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/beeena4" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="#">
+                <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+            <div class="col instagram-item  text-center position-relative">
+              <div class="icon-overlay d-flex justify-content-center position-absolute">
+                <a href="https://github.com/beeena4" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:github"></iconify-icon>
+                </a>
+                <a href="https://www.instagram.com/namaakun2" target="_blank" class="mx-1">
+                  <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
+                </a>
+              </div>
+              <a href="https://github.com/beeena4">
+                <img src="/asset/persia.png" alt="insta-img" class="img-fluid rounded-3">
+              </a>
+            </div>
+          </div>
+        </section>
 
 
-      <div th:replace=" ~{fragments/footer :: footer}">
-      </div>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
-      <script src="/js/index.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-      <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-</body>
+        <div th:replace=" ~{fragments/footer :: footer}">
+        </div>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js'></script>
+        <script src="/js/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </body>
 
-</html>
+  </html>

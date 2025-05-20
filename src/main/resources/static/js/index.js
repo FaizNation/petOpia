@@ -33,3 +33,17 @@ jQuery("#carousel").owlCarousel({
     }
   }
 });
+
+$(document).ready(function() {
+  // Trigger modal alert for Paw's Sale items
+  $('#carousel').on('click', '.paws-sale-link', function(e) {
+    e.preventDefault();
+    var imgSrc = $(this).data('img');
+    var nama = $(this).data('nama');
+    var harga = $(this).data('harga');
+    var alertText = $(this).data('alert');
+    $('#pawsSaleModalImg').attr('src', imgSrc);
+    $('#pawsSaleModalText').html('<b>' + nama + '</b><br>' + harga + '<br><br>' + alertText);
+    $('#pawsSaleAlertModal').modal('show');
+  });
+});
