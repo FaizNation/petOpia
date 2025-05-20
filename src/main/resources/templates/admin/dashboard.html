@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - PetOpia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/shop.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <style>
         body { background: #f8f9fa; }
         .dashboard-card {
@@ -21,10 +26,10 @@
         }
     </style>
 </head>
-<body>
+<body>  
     <div class="container">
         <div class="dashboard-card mt-5">
-            <h1 class="dashboard-title mb-4">Admin Dashboard</h1>            <p>Selamat Datang geys, <b>admin</b>!</p>
+            <h1 class="dashboard-title mb-4">Admin Dashboard</h1>            <p>Selamat Datang king, <b>admin</b>!</p>
             <hr>
             <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
                 <div class="col">
@@ -36,33 +41,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card h-100 border-success">
-                        <div class="card-body">
-                            <h5 class="card-title">User Management</h5>
-                            <p class="card-text">View and manage user accounts and permissions.</p>
-                            <button class="btn btn-success" disabled>Coming Soon</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 border-info">
-                        <div class="card-body">
-                            <h5 class="card-title">Sales Reports</h5>
-                            <p class="card-text">View sales statistics and generate reports.</p>
-                            <button class="btn btn-info" disabled>Coming Soon</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card h-100 border-warning">
-                        <div class="card-body">
-                            <h5 class="card-title">Settings</h5>
-                            <p class="card-text">Configure system settings and preferences.</p>
-                            <button class="btn btn-warning" disabled>Coming Soon</button>
-                        </div>
-                    </div>
-                </div>
+                
+                
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <a href="/index" class="btn btn-outline-secondary">

@@ -7,7 +7,8 @@
     <title>All Pet - PetOpia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-      <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/shop.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
@@ -19,7 +20,8 @@
         <h2 class="mb-4">Our Pets</h2>
 
         <!-- Alert for add to cart -->
-        <div th:if="${session.cartMessage != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <div th:if="${session.cartMessage != null}" class="alert alert-success alert-dismissible fade show"
+            role="alert">
             <span th:text="${session.cartMessage}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                 onclick="this.parentElement.style.display='none';"></button>
@@ -43,7 +45,7 @@
                 </div>
             </div>
             <div class="col-md-3 mb-2">
-    
+
                 <select class="form-select" id="sort" name="sort" onchange="this.form.submit()">
                     <option value="" th:selected="${sort == null}">Sort By</option>
                     <option value="price_desc" th:selected="${sort == 'price_desc'}">Highest Price</option>
@@ -66,7 +68,8 @@
             <div class="col" th:each="pet : ${pets}">
                 <div class="card h-100 shadow-sm">
                     <!-- In the image section - add null checking and consistent property access -->
-                    <div class="position-relative">                        <div th:with="imgName=${pet.getrasPet() != null ? 
+                    <div class="position-relative">
+                        <div th:with="imgName=${pet.getrasPet() != null ? 
                     #strings.replace(#strings.toLowerCase(pet.getrasPet()), ' ', '') + '.png' : 
                     'default.png'}">
                             <img th:src="@{'/asset/' + ${imgName}}" class="card-img-top" th:alt="${pet.getrasPet()}"
@@ -78,14 +81,17 @@
 
                     <!-- In card body - use consistent property access -->
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${pet.getrasPet() != null ? pet.getrasPet() : 'Unknown Pet'}">Pet Name
+                        <h5 class="card-title" th:text="${pet.getrasPet() != null ? pet.getrasPet() : 'Unknown Pet'}">
+                            Pet Name
                         </h5>
-                        <div class="mb-3">                            <span class="text-decoration-line-through text-muted" th:if="${pet.getHargaPet() != null}"
+                        <div class="mb-3"> <span class="text-decoration-line-through text-muted"
+                                th:if="${pet.getHargaPet() != null}"
                                 th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet(), 0, 'COMMA', 0, 'POINT')}">
                                 Original Price
                             </span>
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="text-danger mb-0" th:if="${pet.getHargaPet() != null and pet.getDiskonPet() != null}"
+                                <h5 class="text-danger mb-0"
+                                    th:if="${pet.getHargaPet() != null and pet.getDiskonPet() != null}"
                                     th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()), 0, 'COMMA', 0, 'POINT')}">
                                     Discounted Price
                                 </h5>
@@ -96,9 +102,11 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <span th:if="${pet.getStokPet() != null and pet.getStokPet() > 0}" class="badge bg-success">In
+                            <span th:if="${pet.getStokPet() != null and pet.getStokPet() > 0}"
+                                class="badge bg-success">In
                                 Stock</span>
-                            <span th:if="${pet.getStokPet() != null and pet.getStokPet() <= 0}" class="badge bg-danger">Out of
+                            <span th:if="${pet.getStokPet() != null and pet.getStokPet() <= 0}"
+                                class="badge bg-danger">Out of
                                 Stock</span>
                             <small class="text-muted" th:if="${pet.getStokPet() != null}"
                                 th:text="${pet.getStokPet()} + ' available'">Stock</small>
@@ -106,8 +114,8 @@
                         <form th:action="@{/shop/add-to-cart}" method="post" class="d-flex gap-2">
                             <input type="hidden" name="rasPet" th:value="${pet.getrasPet()}" />
                             <input type="number" name="qty" min="1"
-                                th:attr="max=${pet.getStokPet() != null ? pet.getStokPet() : 0}"
-                                value="1" class="form-control" style="width: 70px;"
+                                th:attr="max=${pet.getStokPet() != null ? pet.getStokPet() : 0}" value="1"
+                                class="form-control" style="width: 70px;"
                                 th:disabled="${pet.getStokPet() == null or pet.getStokPet() <= 0}" />
                             <button class="btn btn-primary flex-grow-1" type="submit"
                                 th:disabled="${pet.getStokPet() == null or pet.getStokPet() <= 0}">

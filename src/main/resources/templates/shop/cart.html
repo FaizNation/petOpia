@@ -7,7 +7,9 @@
     <title>Cart - PetOpia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-      <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/shop.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
@@ -18,7 +20,8 @@
         <h2 class="mb-4">Shopping Cart</h2>
 
         <!-- Alert for cart actions -->
-        <div th:if="${session.cartMessage != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <div th:if="${session.cartMessage != null}" class="alert alert-success alert-dismissible fade show"
+            role="alert">
             <span th:text="${session.cartMessage}"></span>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
                 onclick="this.parentElement.style.display='none';"></button>
@@ -39,8 +42,10 @@
                     <div class="card-body">
                         <div th:each="pet, iteration : ${cartPets}" class="row mb-4">
                             <div class="col-md-3">
-                                <div th:with="imgName=${#strings.replace(#strings.toLowerCase(pet.getrasPet()), ' ', '') + '.png'}">
-                                    <img th:src="@{'/asset/' + ${imgName}}" class="img-fluid rounded" th:alt="${pet.getrasPet()}">
+                                <div
+                                    th:with="imgName=${#strings.replace(#strings.toLowerCase(pet.getrasPet()), ' ', '') + '.png'}">
+                                    <img th:src="@{'/asset/' + ${imgName}}" class="img-fluid rounded"
+                                        th:alt="${pet.getrasPet()}">
                                 </div>
                             </div>
                             <div class="col-md-9">
@@ -48,14 +53,15 @@
                                     <div>
                                         <h5 class="card-title" th:text="${pet.getrasPet()}">Pet Name</h5>
                                         <p class="text-muted mb-0" th:text="${pet.getjenisPet()}">Type</p>
-                                        <p class="text-danger mb-0" th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()), 0, 'COMMA', 0, 'POINT')}">Price</p>
+                                        <p class="text-danger mb-0"
+                                            th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()), 0, 'COMMA', 0, 'POINT')}">
+                                            Price</p>
                                         <div class="d-flex align-items-center mt-2">
                                             <span class="me-2">Quantity:</span>
-                                            <input type="number" class="form-control form-control-sm" style="width: 70px;"
-                                                th:name="'qty-' + ${pet.getrasPet()}"
-                                                th:value="${cart.get(pet.getrasPet())}"
-                                                min="1" th:max="${pet.getStokPet()}"
-                                                onchange="updateQuantity(this)" />
+                                            <input type="number" class="form-control form-control-sm"
+                                                style="width: 70px;" th:name="'qty-' + ${pet.getrasPet()}"
+                                                th:value="${cart.get(pet.getrasPet())}" min="1"
+                                                th:max="${pet.getStokPet()}" onchange="updateQuantity(this)" />
                                         </div>
                                     </div>
                                     <form th:action="@{/shop/remove-from-cart}" method="post" class="ms-3">
@@ -78,18 +84,20 @@
                     <div class="card-body">
                         <h5 class="card-title mb-4">Order Summary</h5>
                         <div th:each="pet : ${cartPets}" class="d-flex justify-content-between mb-2">
-                            <span th:text="${pet.getrasPet() + ' x ' + cart.get(pet.getrasPet())}">Item x Quantity</span>
-                            <span th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()), 0, 'COMMA', 0, 'POINT')}">Subtotal</span>
+                            <span th:text="${pet.getrasPet() + ' x ' + cart.get(pet.getrasPet())}">Item x
+                                Quantity</span>
+                            <span
+                                th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()), 0, 'COMMA', 0, 'POINT')}">Subtotal</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between mb-3">
                             <strong>Total</strong>
                             <strong>
                                 <th:block th:with="total=${0}">
-                                    <th:block th:each="pet : ${cartPets}" 
-                                              th:with="total=${total + (pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()))}">
-                                        <th:block th:if="${petStat.last}" 
-                                                  th:text="'Rp ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}">
+                                    <th:block th:each="pet : ${cartPets}"
+                                        th:with="total=${total + (pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()))}">
+                                        <th:block th:if="${petStat.last}"
+                                            th:text="'Rp ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}">
                                         </th:block>
                                     </th:block>
                                 </th:block>
@@ -112,17 +120,17 @@
             const form = document.createElement('form');
             form.method = 'POST';
             form.action = '/shop/update-cart';
-            
+
             const rasPetInput = document.createElement('input');
             rasPetInput.type = 'hidden';
             rasPetInput.name = 'rasPet';
             rasPetInput.value = input.name.replace('qty-', '');
-            
+
             const qtyInput = document.createElement('input');
             qtyInput.type = 'hidden';
             qtyInput.name = 'qty';
             qtyInput.value = input.value;
-            
+
             form.appendChild(rasPetInput);
             form.appendChild(qtyInput);
             document.body.appendChild(form);
