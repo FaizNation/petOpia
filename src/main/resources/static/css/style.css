@@ -2,7 +2,7 @@
 body {
     padding-top: 60px;
     font-family: 'Fredoka One', cursive;
-    background: url('/asset/background.png') no-repeat center center;
+    background: url('/asset/Background.png') no-repeat center center;
     background-size: 80rem auto;
     background-attachment: fixed;
     margin: 40px auto;
@@ -281,7 +281,7 @@ body {
 }
 
 .categories {
-    background: url('/asset/background-Kategori.png') no-repeat center center;
+    background: url('/asset/Background-Kategori.png') no-repeat center center;
     background-size: cover;
     width: 100%;
     height: 150vh;

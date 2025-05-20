@@ -25,34 +25,29 @@ public class services {
     }
 
     public static void listPet() {
+        // Clear existing lists
+        listKucing.clear();
+        listAnjing.clear();
+        listBurung.clear();
+        listIkan.clear();
 
-        listKucing.add(new kucing("Persia", 6500000, 10, "Kucing", 0.1,
-                "panjang dan mewah", "■■■■■", LocalDate.of(2024, 12, 25), "Lengkap"));
-        listKucing.add(new kucing("Anggora", 1400000, 8, "Kucing", 0.08,
-                "panjang dan padat", "■■■■■", LocalDate.of(2024, 2, 29), "Ulang"));
-        listKucing.add(new kucing("Maine coon", 1800000, 5, "Kucing", 0.12,
-                "Padat dan halus", "■■■■■", LocalDate.of(2024, 9, 25), "Sebagian"));
-
-        listAnjing.add(new anjing("Golden", 4750000, 5, "Anjing", 0.12,
-                "22-24 inchi", "■■■■-", LocalDate.of(2023, 11, 25), "Lengkap"));
-        listAnjing.add(new anjing("Husky", 5500000, 4, "Anjing", 0.4,
-                "21-23 inci", "■■■■-", LocalDate.of(2021, 8, 25), "Lengkap"));
-        listAnjing.add(new anjing("Bulldog", 23000000, 6, "Anjing", 0.7,
-                "14–16 inci", "■■■■■", LocalDate.of(2021, 7, 25), "Lengkap"));
-
-        listIkan.add(new ikan("Koi", 500000, 20, "Ikan", 0.3,
-                "Cyprinus rubrofuscus", "18-28°C", LocalDate.of(2021, 5, 8), "Sebagian"));
-        listIkan.add(new ikan("Arwana", 200000, 10, "Ikan", 0.10,
-                "Scleropages formosus", "26-30°C", LocalDate.of(2019, 4, 6), "Lengkap"));
-        listIkan.add(new ikan("Cupang", 25000, 50, "Ikan", 0,
-                "Betta", "24-28°C", LocalDate.of(2024, 5, 3), "-"));
-
-        listBurung.add(new burung("Kakaktua", 2500000, 8, "Burung", 1,
-                "300-900 gram)", "keras dan melengking", LocalDate.of(2024, 2, 23), "-"));
-        listBurung.add(new burung("Beo", 1500000, 15, "Burung", 1.1,
-                "418-526 gram", "Dapat Bicara", LocalDate.of(2025, 4, 15), "-"));
-        listBurung.add(new burung("Kenari", 500000, 28, "Burung", 2.0,
-                "15-30 gram", " Gacor dan Panjang", LocalDate.of(2023, 5, 24), "-"));
+        // Add sample pets if lists are empty
+        if (listKucing.isEmpty()) {
+            listKucing.add(new kucing("Persian", 2500000, 5, "Kucing", 0.1, "Long Hair", "Yellow", LocalDate.now(), "Active"));
+            listKucing.add(new kucing("Angora", 2000000, 3, "Kucing", 0.15, "Medium Hair", "White", LocalDate.now(), "Active"));
+        }
+        if (listAnjing.isEmpty()) {
+            listAnjing.add(new anjing("Husky", 5000000, 2, "Anjing", 0.05, "Large", "Active", LocalDate.now(), "Active"));
+            listAnjing.add(new anjing("Poodle", 3000000, 4, "Anjing", 0.1, "Small", "Friendly", LocalDate.now(), "Active"));
+        }
+        if (listBurung.isEmpty()) {
+            listBurung.add(new burung("Lovebird", 500000, 10, "Burung", 0.2, "Colorful", "Sweet", LocalDate.now(), "Active"));
+            listBurung.add(new burung("Cockatiel", 750000, 6, "Burung", 0.15, "Yellow", "Cheerful", LocalDate.now(), "Active"));
+        }
+        if (listIkan.isEmpty()) {
+            listIkan.add(new ikan("Koi", 1000000, 8, "Ikan", 0.1, "Large", "Orange", LocalDate.now(), "Active"));
+            listIkan.add(new ikan("Guppy", 50000, 20, "Ikan", 0.25, "Small", "Colorful", LocalDate.now(), "Active"));
+        }
     }
 
     public static void displayPets(Scanner scanner) {
@@ -401,4 +396,28 @@ public class services {
                 return;
         }
     }
+
+    public static List<petList> getAllPets() {
+        List<petList> allPets = new ArrayList<>();
+        allPets.addAll(listKucing);
+        allPets.addAll(listAnjing);
+        allPets.addAll(listBurung);
+        allPets.addAll(listIkan);
+        return allPets;
+    }
+
+    public static petList findPetByName(String name) {
+        return getAllPets().stream()
+                .filter(pet -> pet.getrasPet().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public static void deletePetByName(String name) {
+        listKucing.removeIf(pet -> pet.getrasPet().equals(name));
+        listAnjing.removeIf(pet -> pet.getrasPet().equals(name));
+        listBurung.removeIf(pet -> pet.getrasPet().equals(name));
+        listIkan.removeIf(pet -> pet.getrasPet().equals(name));
+    }
+
 }

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Pet - PetOpia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/shop.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="container mt-5 pt-4">
+        <h2 class="mb-4">Our Pets</h2>
+
+        <!-- Alert for add to cart -->
+        <div th:if="${session.cartMessage != null}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${session.cartMessage}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"
+                onclick="this.parentElement.style.display='none';"></button>
+        </div>
+        <script th:inline="javascript">
+            /* Remove cartMessage from session after showing */
+            /*<![CDATA[*/
+            /* This will only work if you reload the page, not with AJAX */
+            /*]]>*/
+        </script>
+
+        <!-- Search and Filter Form -->
+        <form class="row mb-4" method="get" action="/shop/all-pet">
+            <div class="col-md-4 mb-2">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="search" placeholder="Search pets..."
+                        th:value="${search}">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-3 mb-2">
+    
+                <select class="form-select" id="sort" name="sort" onchange="this.form.submit()">
+                    <option value="" th:selected="${sort == null}">Sort By</option>
+                    <option value="price_desc" th:selected="${sort == 'price_desc'}">Highest Price</option>
+                    <option value="price_asc" th:selected="${sort == 'price_asc'}">Lowest Price</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <select class="form-select" id="category" name="category" onchange="this.form.submit()">
+                    <option value="" th:selected="${category == null}">All Categories</option>
+                    <option value="Kucing" th:selected="${category == 'Kucing'}">Cats</option>
+                    <option value="Anjing" th:selected="${category == 'Anjing'}">Dogs</option>
+                    <option value="Burung" th:selected="${category == 'Burung'}">Birds</option>
+                    <option value="Ikan" th:selected="${category == 'Ikan'}">Fish</option>
+                </select>
+            </div>
+        </form>
+
+        <!-- Pet Cards Grid -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col" th:each="pet : ${pets}">
+                <div class="card h-100 shadow-sm">
+                    <!-- In the image section - add null checking and consistent property access -->
+                    <div class="position-relative">                        <div th:with="imgName=${pet.getrasPet() != null ? 
+                    #strings.replace(#strings.toLowerCase(pet.getrasPet()), ' ', '') + '.png' : 
+                    'default.png'}">
+                            <img th:src="@{'/asset/' + ${imgName}}" class="card-img-top" th:alt="${pet.getrasPet()}"
+                                style="height: 200px; object-fit: cover;">
+                        </div>
+                        <span class="position-absolute top-0 end-0 badge rounded-pill bg-success m-2"
+                            th:text="${pet.getjenisPet() != null ? pet.getjenisPet() : 'Unknown'}">Type</span>
+                    </div>
+
+                    <!-- In card body - use consistent property access -->
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${pet.getrasPet() != null ? pet.getrasPet() : 'Unknown Pet'}">Pet Name
+                        </h5>
+                        <div class="mb-3">                            <span class="text-decoration-line-through text-muted" th:if="${pet.getHargaPet() != null}"
+                                th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet(), 0, 'COMMA', 0, 'POINT')}">
+                                Original Price
+                            </span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="text-danger mb-0" th:if="${pet.getHargaPet() != null and pet.getDiskonPet() != null}"
+                                    th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()), 0, 'COMMA', 0, 'POINT')}">
+                                    Discounted Price
+                                </h5>
+                                <span class="badge bg-warning text-dark" th:if="${pet.getDiskonPet() != null}"
+                                    th:text="${#numbers.formatDecimal(pet.getDiskonPet() * 100, 1, 0)} + '% OFF'">
+                                    Discount
+                                </span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span th:if="${pet.getStokPet() != null and pet.getStokPet() > 0}" class="badge bg-success">In
+                                Stock</span>
+                            <span th:if="${pet.getStokPet() != null and pet.getStokPet() <= 0}" class="badge bg-danger">Out of
+                                Stock</span>
+                            <small class="text-muted" th:if="${pet.getStokPet() != null}"
+                                th:text="${pet.getStokPet()} + ' available'">Stock</small>
+                        </div>
+                        <form th:action="@{/shop/add-to-cart}" method="post" class="d-flex gap-2">
+                            <input type="hidden" name="rasPet" th:value="${pet.getrasPet()}" />
+                            <input type="number" name="qty" min="1"
+                                th:attr="max=${pet.getStokPet() != null ? pet.getStokPet() : 0}"
+                                value="1" class="form-control" style="width: 70px;"
+                                th:disabled="${pet.getStokPet() == null or pet.getStokPet() <= 0}" />
+                            <button class="btn btn-primary flex-grow-1" type="submit"
+                                th:disabled="${pet.getStokPet() == null or pet.getStokPet() <= 0}">
+                                <i class="bi bi-cart-plus"></i> Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div th:if="${#lists.isEmpty(pets)}" class="text-center mt-5">
+            <i class="bi bi-emoji-frown display-1 text-muted"></i>
+            <h3 class="mt-3">No pets found</h3>
+            <p class="text-muted">Try adjusting your search or filter criteria</p>
+        </div>
+    </div>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

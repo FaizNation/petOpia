@@ -27,6 +27,9 @@ public class AuthController {
         if (userService.login(username, password)) {
             HttpSession session = request.getSession();
             session.setAttribute("loggedInUser", username);
+            if (userService.isAdmin(username)) {
+                return "redirect:admin/dashboard";
+            }
             return "redirect:/index";
         }
         model.addAttribute("error", "Username atau password salah!");
@@ -52,5 +55,15 @@ public class AuthController {
         }
         model.addAttribute("error", "Username sudah ada!");
         return "auth/register";
+    }
+
+    @GetMapping("/admin/dashboard")
+    public String adminDashboard(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Object user = session.getAttribute("loggedInUser");
+        if (user == null || !userService.isAdmin(user.toString())) {
+            return "redirect:/auth/login";
+        }
+        return "admin/dashboard";
     }
 }

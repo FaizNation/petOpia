@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - PetOpia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background: #f8f9fa; }
+        .dashboard-card {
+            background: #fff;
+            border: 2px solid #d351ac;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(211,81,172,0.08);
+            padding: 32px;
+            margin-top: 48px;
+        }
+        .dashboard-title {
+            color: #d351ac;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard-card mt-5">
+            <h1 class="dashboard-title mb-4">Admin Dashboard</h1>            <p>Welcome, <b>admin</b>!</p>
+            <hr>
+            <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+                <div class="col">
+                    <div class="card h-100 border-primary">
+                        <div class="card-body">
+                            <h5 class="card-title">Pet Management</h5>
+                            <p class="card-text">Add, edit, or remove pets from the shop inventory.</p>
+                            <a href="/admin/pets" class="btn btn-primary">Manage Pets</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-success">
+                        <div class="card-body">
+                            <h5 class="card-title">User Management</h5>
+                            <p class="card-text">View and manage user accounts and permissions.</p>
+                            <button class="btn btn-success" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-info">
+                        <div class="card-body">
+                            <h5 class="card-title">Sales Reports</h5>
+                            <p class="card-text">View sales statistics and generate reports.</p>
+                            <button class="btn btn-info" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body">
+                            <h5 class="card-title">Settings</h5>
+                            <p class="card-text">Configure system settings and preferences.</p>
+                            <button class="btn btn-warning" disabled>Coming Soon</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <a href="/index" class="btn btn-outline-secondary">
+                    <i class="bi bi-house"></i> Back to Homepage
+                </a>
+                <a href="/auth/logout" class="btn btn-outline-danger">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
