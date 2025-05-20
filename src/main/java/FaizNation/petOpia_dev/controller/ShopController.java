@@ -14,20 +14,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/shop")
 public class ShopController {
     private static final List<String> categories = Arrays.asList("Kucing", "Anjing", "Burung", "Ikan");
-    private final List<petList> allPets = new ArrayList<>();
-    private static boolean petsInitialized = false;
-
-    private void initializePets() {
-        if (!petsInitialized) {
-            services.listPet();
-            allPets.clear();
-            allPets.addAll(services.listKucing);
-            allPets.addAll(services.listAnjing);
-            allPets.addAll(services.listBurung);
-            allPets.addAll(services.listIkan);
-            petsInitialized = true;
-        }
-    }
 
     @GetMapping("/all-pet")
     public String allPetPage(Model model,
@@ -35,46 +21,42 @@ public class ShopController {
             @RequestParam(value = "sort", required = false) String sort,
             @RequestParam(value = "category", required = false) String category,
             HttpSession session) {
-        
-        // Initialize pets list
-        initializePets();
-        
+        // Ambil data terbaru setiap kali
+        List<petList> allPets = new ArrayList<>();
+        allPets.addAll(services.listKucing);
+        allPets.addAll(services.listAnjing);
+        allPets.addAll(services.listBurung);
+        allPets.addAll(services.listIkan);
         // Apply filters
         List<petList> filteredPets = new ArrayList<>(allPets);
-        
         // Apply search filter
         if (search != null && !search.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getrasPet().toLowerCase().contains(search.toLowerCase()))
                     .collect(Collectors.toList());
         }
-        
         // Apply category filter
         if (category != null && !category.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getjenisPet().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         }
-        
         // Apply sorting
         if ("price_desc".equals(sort)) {
             filteredPets.sort((a, b) -> Double.compare(b.getHargaPet(), a.getHargaPet()));
         } else if ("price_asc".equals(sort)) {
             filteredPets.sort(Comparator.comparingDouble(petList::getHargaPet));
         }
-        
         model.addAttribute("pets", filteredPets);
         model.addAttribute("categories", categories);
         model.addAttribute("search", search);
         model.addAttribute("sort", sort);
         model.addAttribute("category", category);
-        
         Object cartMessage = session.getAttribute("cartMessage");
         if (cartMessage != null) {
             model.addAttribute("cartMessage", cartMessage);
             session.removeAttribute("cartMessage");
         }
-        
         return "shop/all-pet";
     }
 
@@ -86,8 +68,12 @@ public class ShopController {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
         }
-        // Reduce stock immediately
-        initializePets();
+        // Ambil data terbaru setiap kali
+        List<petList> allPets = new ArrayList<>();
+        allPets.addAll(services.listKucing);
+        allPets.addAll(services.listAnjing);
+        allPets.addAll(services.listBurung);
+        allPets.addAll(services.listIkan);
         for (petList pet : allPets) {
             if (pet.getrasPet().equals(rasPet)) {
                 int available = pet.getStokPet();
@@ -116,14 +102,15 @@ public class ShopController {
         } else {
             cart = cartFromSession;
         }
-
-        // Initialize pets
-        initializePets();
-
+        // Ambil data terbaru setiap kali
+        List<petList> allPets = new ArrayList<>();
+        allPets.addAll(services.listKucing);
+        allPets.addAll(services.listAnjing);
+        allPets.addAll(services.listBurung);
+        allPets.addAll(services.listIkan);
         List<petList> cartPets = allPets.stream()
                 .filter(p -> cart.containsKey(p.getrasPet()))
                 .collect(Collectors.toList());
-
         model.addAttribute("cart", cart);
         model.addAttribute("cartPets", cartPets);
         Object cartMessage = session.getAttribute("cartMessage");
@@ -149,11 +136,16 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         if (cart != null && qty > 0) {
-            initializePets();
+            // Ambil data terbaru setiap kali
+            List<petList> allPets = new ArrayList<>();
+            allPets.addAll(services.listKucing);
+            allPets.addAll(services.listAnjing);
+            allPets.addAll(services.listBurung);
+            allPets.addAll(services.listIkan);
             for (petList pet : allPets) {
                 if (pet.getrasPet().equals(rasPet)) {
                     int currentInCart = cart.getOrDefault(rasPet, 0);
-                    int available = pet.getStokPet() + currentInCart; // restore previous cart qty to stock
+                    int available = pet.getStokPet() + currentInCart;
                     int toSet = Math.min(qty, available);
                     pet.setStokPet(available - toSet);
                     cart.put(rasPet, toSet);
@@ -170,8 +162,12 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         if (cart != null) {
-            initializePets();
-
+            // Ambil data terbaru setiap kali
+            List<petList> allPets = new ArrayList<>();
+            allPets.addAll(services.listKucing);
+            allPets.addAll(services.listAnjing);
+            allPets.addAll(services.listBurung);
+            allPets.addAll(services.listIkan);
             for (petList pet : allPets) {
                 if (cart.containsKey(pet.getrasPet())) {
                     int qty = cart.get(pet.getrasPet());
@@ -189,6 +185,12 @@ public class ShopController {
     public String showCheckout(Model model, HttpSession session) {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
+        }
+        // Ambil data shipping dari session jika ada
+        @SuppressWarnings("unchecked")
+        Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
+        if (shipping != null) {
+            model.addAttribute("shipping", shipping);
         }
         return "shop/checkout";
     }
@@ -217,6 +219,17 @@ public class ShopController {
         return "shop/payment";
     }
 
+    @GetMapping("/payment")
+    public String showPaymentPage(Model model, HttpSession session) {
+        // Ambil data shipping dari session jika ada
+        @SuppressWarnings("unchecked")
+        Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
+        if (shipping != null) {
+            model.addAttribute("shipping", shipping);
+        }
+        return "shop/payment";
+    }
+
     @PostMapping("/confirm")
     public String showConfirmation(@RequestParam String paymentMethod,
                                  Model model,
@@ -232,7 +245,11 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
         // Calculate total
-        initializePets();
+        List<petList> allPets = new ArrayList<>();
+        allPets.addAll(services.listKucing);
+        allPets.addAll(services.listAnjing);
+        allPets.addAll(services.listBurung);
+        allPets.addAll(services.listIkan);
         List<petList> cartPets = allPets.stream()
                 .filter(p -> cart.containsKey(p.getrasPet()))
                 .collect(Collectors.toList());
@@ -257,7 +274,11 @@ public class ShopController {
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
-        initializePets();
+        List<petList> allPets = new ArrayList<>();
+        allPets.addAll(services.listKucing);
+        allPets.addAll(services.listAnjing);
+        allPets.addAll(services.listBurung);
+        allPets.addAll(services.listIkan);
         List<petList> cartPets = allPets.stream()
                 .filter(p -> cart.containsKey(p.getrasPet()))
                 .collect(Collectors.toList());

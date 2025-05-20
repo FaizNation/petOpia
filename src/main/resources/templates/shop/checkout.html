@@ -31,28 +31,28 @@
                             
                             <div class="mb-3">
                                 <label for="fullName" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                <input type="text" class="form-control" id="fullName" name="fullName" required th:value="${shipping != null ? shipping.fullName : ''}">
                             </div>
                             
                             <div class="mb-3">
                                 <label for="address" class="form-label">Complete Address</label>
-                                <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+                                <textarea class="form-control" id="address" name="address" rows="3" required th:text="${shipping != null ? shipping.address : ''}"></textarea>
                             </div>
                             
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="city" class="form-label">City</label>
-                                    <input type="text" class="form-control" id="city" name="city" required>
+                                    <input type="text" class="form-control" id="city" name="city" required th:value="${shipping != null ? shipping.city : ''}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="postalCode" class="form-label">Postal Code</label>
-                                    <input type="text" class="form-control" id="postalCode" name="postalCode" required>
+                                    <input type="text" class="form-control" id="postalCode" name="postalCode" required th:value="${shipping != null ? shipping.postalCode : ''}">
                                 </div>
                             </div>
                             
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                                <input type="tel" class="form-control" id="phone" name="phone" required th:value="${shipping != null ? shipping.phone : ''}">
                             </div>
                             
                             <div class="d-flex justify-content-between mt-4">

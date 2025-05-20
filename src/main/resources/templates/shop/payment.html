@@ -54,6 +54,15 @@
                                 </div>
                             </div>
 
+                            <!-- Shipping Info Display (Optional) -->
+                            <div th:if="${shipping != null}" class="mb-3">
+                                <h5>Shipping Info</h5>
+                                <p th:text="${shipping.fullName}"></p>
+                                <p th:text="${shipping.address}"></p>
+                                <p th:text="${shipping.city + ' ' + shipping.postalCode}"></p>
+                                <p th:text="${shipping.phone}"></p>
+                            </div>
+
                             <div class="d-flex justify-content-between mt-4">
                                 <a href="/shop/checkout" class="btn btn-outline-primary">Back to Shipping</a>
                                 <button type="submit" class="btn btn-primary">Review Order</button>
