@@ -7,6 +7,7 @@
     <title>Cart - PetOpia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+      <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
@@ -83,9 +84,18 @@
                         <hr>
                         <div class="d-flex justify-content-between mb-3">
                             <strong>Total</strong>
-                            <strong th:text="'Rp ' + ${#numbers.formatDecimal(#aggregates.sum(cartPets.![getHargaPet() * (1 - getDiskonPet()) * cart.get(getrasPet())]), 0, 'COMMA', 0, 'POINT')}">Total Price</strong>
+                            <strong>
+                                <th:block th:with="total=${0}">
+                                    <th:block th:each="pet : ${cartPets}" 
+                                              th:with="total=${total + (pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()))}">
+                                        <th:block th:if="${petStat.last}" 
+                                                  th:text="'Rp ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}">
+                                        </th:block>
+                                    </th:block>
+                                </th:block>
+                            </strong>
                         </div>
-                        <form th:action="@{/shop/checkout}" method="post">
+                        <form th:action="@{/shop/checkout}" method="get">
                             <button type="submit" class="btn btn-primary w-100">Proceed to Checkout</button>
                         </form>
                         <a href="/shop/all-pet" class="btn btn-outline-primary w-100 mt-2">Continue Shopping</a>
