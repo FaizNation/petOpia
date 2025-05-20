@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class AdminService {
     private final Map<String, String> users = new HashMap<>();
     private final String ADMIN_USERNAME = "admin";
     private final String ADMIN_PASSWORD = "admin1234";
