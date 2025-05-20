@@ -41,7 +41,8 @@
                   
                 <div class="mb-3">
                     <label class="form-label">Pet Name</label>
-                    <input type="text" class="form-control" name="name" th:value="${pet != null ? pet.getrasPet() : ''}" required>
+                    <input type="text" class="form-control" name="name" th:if="${pet == null}" required>
+                    <input type="text" class="form-control" name="newName" th:if="${pet != null}" th:value="${pet.getrasPet()}" required>
                 </div>
                 
                 <div class="mb-3">
@@ -111,3 +112,4 @@
     </script>
 </body>
 </html>
+    
