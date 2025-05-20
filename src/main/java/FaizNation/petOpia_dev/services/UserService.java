@@ -1,10 +1,10 @@
 package FaizNation.petOpia_dev.services;
 
 
-import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
@@ -14,10 +14,10 @@ public class UserService {
 
     public boolean register(String username, String password) {
         if (ADMIN_USERNAME.equals(username)) {
-            return false; // Admin cannot be registered via form
+            return false; 
         }
         if (users.containsKey(username)) {
-            return false; // Username already exists
+            return false;
         }
         users.put(username, password);
         return true;

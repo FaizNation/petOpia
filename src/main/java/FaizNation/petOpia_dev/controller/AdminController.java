@@ -1,16 +1,29 @@
 package FaizNation.petOpia_dev.controller;
 
-import FaizNation.petOpia_dev.models.*;
-import FaizNation.petOpia_dev.services.*;
-import jakarta.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.util.Arrays;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import FaizNation.petOpia_dev.models.anjing;
+import FaizNation.petOpia_dev.models.burung;
+import FaizNation.petOpia_dev.models.ikan;
+import FaizNation.petOpia_dev.models.kucing;
+import FaizNation.petOpia_dev.models.petList;
+import FaizNation.petOpia_dev.services.services;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
@@ -55,7 +68,7 @@ public class AdminController {
             Files.copy(image.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        // Create pet based on category
+
         petList newPet;
         switch (category.toLowerCase()) {
             case "kucing":
@@ -114,14 +127,12 @@ public class AdminController {
             return "redirect:/auth/login";
         }
 
-        // Update image if provided
         if (image != null && !image.isEmpty()) {
             String fileName = newName.toLowerCase().replace(" ", "") + ".png";
             Path imagePath = Paths.get("src/main/resources/static/asset/" + fileName);
             Files.copy(image.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        // Update pet details
         petList pet = services.findPetByName(name);
         if (pet != null) {
             pet.setrasPet(newName);

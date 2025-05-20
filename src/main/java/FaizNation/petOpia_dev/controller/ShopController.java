@@ -1,14 +1,23 @@
 package FaizNation.petOpia_dev.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import FaizNation.petOpia_dev.models.petList;
 import FaizNation.petOpia_dev.services.services;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/shop")
@@ -36,27 +45,22 @@ public class ShopController {
             @RequestParam(value = "category", required = false) String category,
             HttpSession session) {
         
-        // Initialize pets list
         initializePets();
         
-        // Apply filters
         List<petList> filteredPets = new ArrayList<>(allPets);
         
-        // Apply search filter
         if (search != null && !search.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getrasPet().toLowerCase().contains(search.toLowerCase()))
                     .collect(Collectors.toList());
         }
         
-        // Apply category filter
         if (category != null && !category.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getjenisPet().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         }
         
-        // Apply sorting
         if ("price_desc".equals(sort)) {
             filteredPets.sort((a, b) -> Double.compare(b.getHargaPet(), a.getHargaPet()));
         } else if ("price_asc".equals(sort)) {
@@ -86,7 +90,6 @@ public class ShopController {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
         }
-        // Reduce stock immediately
         initializePets();
         for (petList pet : allPets) {
             if (pet.getrasPet().equals(rasPet)) {
@@ -117,7 +120,6 @@ public class ShopController {
             cart = cartFromSession;
         }
 
-        // Initialize pets
         initializePets();
 
         List<petList> cartPets = allPets.stream()
