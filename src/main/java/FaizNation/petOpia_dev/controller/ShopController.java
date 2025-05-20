@@ -1,23 +1,14 @@
 package FaizNation.petOpia_dev.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import FaizNation.petOpia_dev.models.petList;
 import FaizNation.petOpia_dev.services.services;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/shop")
@@ -45,22 +36,27 @@ public class ShopController {
             @RequestParam(value = "category", required = false) String category,
             HttpSession session) {
         
+        // Initialize pets list
         initializePets();
         
+        // Apply filters
         List<petList> filteredPets = new ArrayList<>(allPets);
         
+        // Apply search filter
         if (search != null && !search.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getrasPet().toLowerCase().contains(search.toLowerCase()))
                     .collect(Collectors.toList());
         }
         
+        // Apply category filter
         if (category != null && !category.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getjenisPet().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         }
         
+        // Apply sorting
         if ("price_desc".equals(sort)) {
             filteredPets.sort((a, b) -> Double.compare(b.getHargaPet(), a.getHargaPet()));
         } else if ("price_asc".equals(sort)) {
@@ -90,6 +86,7 @@ public class ShopController {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
         }
+        // Reduce stock immediately
         initializePets();
         for (petList pet : allPets) {
             if (pet.getrasPet().equals(rasPet)) {
@@ -105,7 +102,7 @@ public class ShopController {
                 break;
             }
         }
-        return "redirect:/shop/all-pet";
+        return "redirect:/shop/cart";
     }
 
     @GetMapping("/cart")
@@ -120,6 +117,7 @@ public class ShopController {
             cart = cartFromSession;
         }
 
+        // Initialize pets
         initializePets();
 
         List<petList> cartPets = allPets.stream()
@@ -185,5 +183,119 @@ public class ShopController {
             session.removeAttribute("cart");
         }
         return "redirect:/shop/all-pet";
+    }
+
+    @GetMapping("/checkout")
+    public String showCheckout(Model model, HttpSession session) {
+        if (!validateCart(session)) {
+            return "redirect:/shop/cart";
+        }
+        return "shop/checkout";
+    }
+
+    @PostMapping("/payment")
+    public String showPayment(@RequestParam String fullName,
+                            @RequestParam String address,
+                            @RequestParam String city,
+                            @RequestParam String postalCode,
+                            @RequestParam String phone,
+                            Model model,
+                            HttpSession session) {
+        if (!validateCart(session)) {
+            return "redirect:/shop/cart";
+        }
+        // Store shipping details in session
+        Map<String, String> shipping = new HashMap<>();
+        shipping.put("fullName", fullName);
+        shipping.put("address", address);
+        shipping.put("city", city);
+        shipping.put("postalCode", postalCode);
+        shipping.put("phone", phone);
+        session.setAttribute("shipping", shipping);
+        // Pass shipping info to payment page if needed
+        model.addAttribute("shipping", shipping);
+        return "shop/payment";
+    }
+
+    @PostMapping("/confirm")
+    public String showConfirmation(@RequestParam String paymentMethod,
+                                 Model model,
+                                 HttpSession session) {
+        if (!validateCart(session)) {
+            return "redirect:/shop/cart";
+        }
+        // Save payment method in session for later use
+        session.setAttribute("payment", paymentMethod);
+        // Get cart and shipping details
+        @SuppressWarnings("unchecked")
+        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+        @SuppressWarnings("unchecked")
+        Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
+        // Calculate total
+        initializePets();
+        List<petList> cartPets = allPets.stream()
+                .filter(p -> cart.containsKey(p.getrasPet()))
+                .collect(Collectors.toList());
+        double total = cartPets.stream()
+                .mapToDouble(pet -> pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()))
+                .sum();
+        model.addAttribute("cartPets", cartPets);
+        model.addAttribute("cart", cart);
+        model.addAttribute("shipping", shipping);
+        model.addAttribute("payment", paymentMethod);
+        model.addAttribute("total", total);
+        return "shop/confirm";
+    }
+
+    @PostMapping("/complete")
+    public String completeOrder(HttpSession session) {
+        if (!validateCart(session)) {
+            return "redirect:/shop/cart";
+        }
+        // Build order object (for future persistence or display)
+        @SuppressWarnings("unchecked")
+        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+        @SuppressWarnings("unchecked")
+        Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
+        initializePets();
+        List<petList> cartPets = allPets.stream()
+                .filter(p -> cart.containsKey(p.getrasPet()))
+                .collect(Collectors.toList());
+        List<FaizNation.petOpia_dev.models.OrderItem> items = new java.util.ArrayList<>();
+        double total = 0;
+        for (petList pet : cartPets) {
+            int qty = cart.get(pet.getrasPet());
+            double price = pet.getHargaPet();
+            double discount = pet.getDiskonPet();
+            items.add(new FaizNation.petOpia_dev.models.OrderItem(pet.getrasPet(), pet.getjenisPet(), qty, price, discount));
+            total += price * (1 - discount) * qty;
+        }
+        FaizNation.petOpia_dev.models.Order order = new FaizNation.petOpia_dev.models.Order();
+        order.setCustomerName(shipping.get("fullName"));
+        order.setAddress(shipping.get("address"));
+        order.setCity(shipping.get("city"));
+        order.setPostalCode(shipping.get("postalCode"));
+        order.setPhone(shipping.get("phone"));
+        order.setPaymentMethod((String) session.getAttribute("payment"));
+        order.setItems(items);
+        order.setTotalAmount(total);
+        // Optionally: save order to DB or session
+        session.setAttribute("lastOrder", order);
+        // Clear cart and shipping info
+        session.removeAttribute("cart");
+        session.removeAttribute("shipping");
+        session.removeAttribute("payment");
+        return "redirect:/shop/success";
+    }
+
+    @GetMapping("/success")
+    public String showSuccess() {
+        return "shop/success";
+    }
+
+    private boolean validateCart(HttpSession session) {
+        @SuppressWarnings("unchecked")
+        Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
+        return cart != null && !cart.isEmpty();
     }
 }
