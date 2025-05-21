@@ -43,10 +43,12 @@ public class services {
         if (listBurung.isEmpty()) {
             listBurung.add(new burung("Lovebird", 500000, 10, "Burung", 0.0, "Colorful", "Sweet", LocalDate.now(), "Active"));
             listBurung.add(new burung("Cockatiel", 750000, 12, "Burung", 0.15, "Yellow", "Cheerful", LocalDate.now(), "Active"));
+            listBurung.add(new burung("Parrot", 5000000, 10, "Burung", 0.15, "Yellow", "Cheerful", LocalDate.now(), "Active"));
         }
         if (listIkan.isEmpty()) {
             listIkan.add(new ikan("Koi", 1000000, 10, "Ikan", 0.1, "Large", "Orange", LocalDate.now(), "Active"));
             listIkan.add(new ikan("Guppy", 50000, 20, "Ikan", 0.25, "Small", "Colorful", LocalDate.now(), "Active"));
+            listIkan.add(new ikan("Molly",50000, 15, "Ikan", 0.0, "Small", "Colorful", LocalDate.now(), "Active"));
         }
     }
 
