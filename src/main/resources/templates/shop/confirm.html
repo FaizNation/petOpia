@@ -19,7 +19,7 @@
     <div class="container mt-5 pt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow">
+                <div class="card btn-brutal-2">
                     <div class="card-body">
                         <h3 class="card-title mb-4">Lihat Pesanan</h3>
 
@@ -65,16 +65,16 @@
                                 }"></i>
                                 <span th:text="${
                                     payment == 'bankTransfer' ? 'Bank Transfer' : 
-                                    payment == 'qris' ? 'QRIS' : 'Cash on Delivery'
+                                    payment == 'qris' ? 'QRIS' : 'Bayar dan ambil di toko'
                                 }"></span>
                             </p>
                         </div>
 
                         <!-- Confirm Button -->
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="/shop/payment" class="btn btn-outline-primary">Kembali ke Pembayaran</a>
+                            <a href="/shop/payment" class="btn btn-outline-primary btn-brutal-5">Kembali ke Pembayaran</a>
                             <form th:action="@{/shop/complete}" method="post">
-                                <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
+                                <button type="submit" class="btn btn-primary btn-brutal-4">Konfirmasi Pembayaran</button>
                             </form>
                         </div>
                     </div>
