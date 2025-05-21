@@ -25,27 +25,27 @@ public class services {
     }
 
     public static void listPet() {
-        // Clear existing lists
         listKucing.clear();
         listAnjing.clear();
         listBurung.clear();
         listIkan.clear();
 
-        // Add sample pets if lists are empty
         if (listKucing.isEmpty()) {
-            listKucing.add(new kucing("Persian", 2500000, 5, "Kucing", 0.1, "Long Hair", "Yellow", LocalDate.now(), "Active"));
-            listKucing.add(new kucing("Angora", 2000000, 3, "Kucing", 0.15, "Medium Hair", "White", LocalDate.now(), "Active"));
+            listKucing.add(new kucing("Persian", 2500000, 20, "Kucing", 0.1, "Long Hair", "Yellow", LocalDate.now(), "Active"));
+            listKucing.add(new kucing("Angora", 2000000, 15, "Kucing", 0.15, "Medium Hair", "White", LocalDate.now(), "Active"));
+            listKucing.add(new kucing("Munchkin", 4000000, 10, "Kucing", 0.2, "Short Hair", "Brown", LocalDate.now(), "Active"));
         }
         if (listAnjing.isEmpty()) {
-            listAnjing.add(new anjing("Husky", 5000000, 2, "Anjing", 0.05, "Large", "Active", LocalDate.now(), "Active"));
-            listAnjing.add(new anjing("Poodle", 3000000, 4, "Anjing", 0.1, "Small", "Friendly", LocalDate.now(), "Active"));
+            listAnjing.add(new anjing("Husky", 5000000, 20, "Anjing", 0.05, "Large", "Active", LocalDate.now(), "Active"));
+            listAnjing.add(new anjing("Poodle", 3000000, 10, "Anjing", 0.1, "Small", "Friendly", LocalDate.now(), "Active"));
+            listAnjing.add(new anjing("Corgi", 4000000, 11, "Anjing", 0.1, "Small", "Friendly", LocalDate.now(), "Active"));
         }
         if (listBurung.isEmpty()) {
-            listBurung.add(new burung("Lovebird", 500000, 10, "Burung", 0.2, "Colorful", "Sweet", LocalDate.now(), "Active"));
-            listBurung.add(new burung("Cockatiel", 750000, 6, "Burung", 0.15, "Yellow", "Cheerful", LocalDate.now(), "Active"));
+            listBurung.add(new burung("Lovebird", 500000, 10, "Burung", 0.0, "Colorful", "Sweet", LocalDate.now(), "Active"));
+            listBurung.add(new burung("Cockatiel", 750000, 12, "Burung", 0.15, "Yellow", "Cheerful", LocalDate.now(), "Active"));
         }
         if (listIkan.isEmpty()) {
-            listIkan.add(new ikan("Koi", 1000000, 8, "Ikan", 0.1, "Large", "Orange", LocalDate.now(), "Active"));
+            listIkan.add(new ikan("Koi", 1000000, 10, "Ikan", 0.1, "Large", "Orange", LocalDate.now(), "Active"));
             listIkan.add(new ikan("Guppy", 50000, 20, "Ikan", 0.25, "Small", "Colorful", LocalDate.now(), "Active"));
         }
     }
