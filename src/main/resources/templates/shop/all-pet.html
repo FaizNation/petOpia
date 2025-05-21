@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/shop.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
-</head>
+</head> 
 
 <body>
     <div th:replace="~{fragments/navbar :: navbar}"></div>
@@ -32,23 +32,23 @@
         <form class="row mb-4" method="get" action="/shop/all-pet">
             <div class="col-md-4 mb-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search pets..."
+                    <input type="text" class="form-control btn-brutal-2" name="search" placeholder="Search pets..."
                         th:value="${search}">
-                    <button class="btn btn-primary" type="submit">
-                        <i class="bi bi-search"></i>
+                    <button class="btn btn-primary btn-brutal-3" type="submit">
+                        <i class="bi bi-search "></i>
                     </button>
                 </div>
             </div>
             <div class="col-md-3 mb-2">
 
-                <select class="form-select" id="sort" name="sort" onchange="this.form.submit()">
+                <select class="form-select btn-brutal-2" id="sort" name="sort" onchange="this.form.submit()">
                     <option value="" th:selected="${sort == null}">Urutkan Berdasarkan</option>
                     <option value="price_desc" th:selected="${sort == 'price_desc'}">Harga Tertinggi</option>
                     <option value="price_asc" th:selected="${sort == 'price_asc'}">Harga Terendah</option>
                 </select>
             </div>
             <div class="col-md-3 mb-2">
-                <select class="form-select" id="category" name="category" onchange="this.form.submit()">
+                <select class="form-select btn-brutal-2" id="category" name="category" onchange="this.form.submit()">
                     <option value="" th:selected="${category == null}">Semua Kategori</option>
                     <option value="Kucing" th:selected="${category == 'Kucing'}">Kucing</option>
                     <option value="Anjing" th:selected="${category == 'Anjing'}">Anjing</option>
@@ -61,7 +61,7 @@
        
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col" th:each="pet : ${pets}">
-                <div class="card h-100 shadow-sm">
+                <div class="card h-100 shadow-sm shadow-brutal ">
                   
                     <div class="position-relative">
                         <div th:with="imgName=${pet.getrasPet() != null ? 
@@ -108,13 +108,13 @@
                         </div>
                         <form th:action="@{/shop/add-to-cart}" method="post" class="d-flex gap-2">
                             <input type="hidden" name="rasPet" th:value="${pet.getrasPet()}" />
-                            <input type="number" name="qty" min="1"
+                            <input type="number" name="qty" min="1" 
                                 th:attr="max=${pet.getStokPet() != null ? pet.getStokPet() : 0}" value="1"
-                                class="form-control" style="width: 70px;"
+                                class="form-control btn-brutal-2" style="width: 70px;"
                                 th:disabled="${pet.getStokPet() == null or pet.getStokPet() <= 0}" />
-                            <button class="btn btn-primary flex-grow-1" type="submit"
+                            <button class="btn btn-primary flex-grow-1 btn-brutal-4" type="submit"
                                 th:disabled="${pet.getStokPet() == null or pet.getStokPet() <= 0}">
-                                <i class="bi bi-cart-plus"></i> Tambahkan Ke Keranjang
+                                <i class="bi bi-cart-plus "></i> Tambahkan Ke Keranjang
                             </button>
                         </form>
                     </div>

@@ -1,0 +1,37 @@
+.btn-brutal-2 {
+    background-color: #ffffff;
+    color: black;
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-brutal-3 {
+    background-color: #0080ff;
+    color: black;
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-brutal-4 {
+    background-color: #0080ff;
+    color: black;
+    border: 3px solid black;
+    box-shadow: 6px 6px 0 black;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-brutal-4:hover,
+.btn-brutal:focus {
+    color: #ffffff;
+    background-color: #0066ff;
+    box-shadow: 2px 2px 0 #0066ff;
+    transform: translate(2px, 2px);
+    border: 3px solid #000000;
+}
+    
+.btn-brutal-4:active {
+    box-shadow: inset 2px 2px 0 #0066ff;
+    transform: translate(1px, 1px);
+}
