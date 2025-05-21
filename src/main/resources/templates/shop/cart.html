@@ -89,19 +89,9 @@
                             <span
                                 th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()), 0, 'COMMA', 0, 'POINT')}">Jumlah Keseluruhan</span>
                         </div>
-                        <hr>
-                        <div class="d-flex justify-content-between mb-3">
-                            <strong>Total</strong>
-                            <strong>
-                                <th:block th:with="total=${0}">
-                                    <th:block th:each="pet : ${cartPets}"
-                                        th:with="total=${total + (pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()))}">
-                                        <th:block th:if="${petStat.last}"
-                                            th:text="'Rp ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}">
-                                        </th:block>
-                                    </th:block>
-                                </th:block>
-                            </strong>
+                        <hr>                 
+                        <div class="cart-total d-flex justify-content-between mb-3">
+                            <h4>Total Belanja: Rp <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 2, 'POINT')}">0.00</span></h3>
                         </div>
                         <form th:action="@{/shop/checkout}" method="get">
                             <button type="submit" class="btn btn-primary w-100 btn-brutal-4">Lanjutkan ke Pembayaran</button>
@@ -140,3 +130,4 @@
 </body>
 
 </html>
+``` 

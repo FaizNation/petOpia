@@ -110,22 +110,36 @@ public class ShopController {
         } else {
             cart = cartFromSession;
         }
+        
         // Ambil data terbaru setiap kali
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
         allPets.addAll(services.listBurung);
         allPets.addAll(services.listIkan);
+        
         List<petList> cartPets = allPets.stream()
                 .filter(p -> cart.containsKey(p.getrasPet()))
                 .collect(Collectors.toList());
+
+        // Hitung total harga untuk semua item di keranjang
+        double totalPrice = 0.0;
+        for (petList pet : cartPets) {
+            int quantity = cart.get(pet.getrasPet());
+            double itemPrice = pet.getHargaPet() * (1 - pet.getDiskonPet());
+            totalPrice += itemPrice * quantity;
+        }
+
         model.addAttribute("cart", cart);
         model.addAttribute("cartPets", cartPets);
+        model.addAttribute("totalPrice", totalPrice);
+        
         Object cartMessage = session.getAttribute("cartMessage");
         if (cartMessage != null) {
             model.addAttribute("cartMessage", cartMessage);
             session.removeAttribute("cartMessage");
         }
+        
         return "shop/cart";
     }
 
