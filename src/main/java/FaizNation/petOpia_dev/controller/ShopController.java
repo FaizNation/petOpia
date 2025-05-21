@@ -1,14 +1,23 @@
 package FaizNation.petOpia_dev.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import FaizNation.petOpia_dev.models.petList;
 import FaizNation.petOpia_dev.services.services;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/shop")
@@ -21,21 +30,20 @@ public class ShopController {
             @RequestParam(value = "sort", required = false) String sort,
             @RequestParam(value = "category", required = false) String category,
             HttpSession session) {
-        // Ambil data terbaru setiap kali
+
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
         allPets.addAll(services.listBurung);
         allPets.addAll(services.listIkan);
-        // Apply filters
+
         List<petList> filteredPets = new ArrayList<>(allPets);
-        // Apply search filter
         if (search != null && !search.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getrasPet().toLowerCase().contains(search.toLowerCase()))
                     .collect(Collectors.toList());
         }
-        // Apply category filter
+
         if (category != null && !category.isEmpty()) {
             filteredPets = filteredPets.stream()
                     .filter(p -> p.getjenisPet().equalsIgnoreCase(category))
