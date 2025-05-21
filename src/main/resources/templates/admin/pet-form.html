@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,20 +12,30 @@
     <link rel="stylesheet" th:href="@{/css/shop.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
     <style>
-        body { background: #f8f9fa; }
+        body {
+            background-image: url('https://raw.githubusercontent.com/FaizNation/petOpia/2aa4962529901e0cec5a8120f38b6b68936a88b2/src/main/resources/static/asset/background%20admin2.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: 'Fredoka One', cursive;
+        }
+
         .form-card {
             background: #fff;
-            border: 2px solid #d351ac;
             border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(211,81,172,0.08);
             padding: 32px;
             margin-top: 48px;
+            color: black;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0 black;
             max-width: 600px;
         }
+
         .form-title {
             color: #d351ac;
             font-weight: bold;
         }
+
         .preview-image {
             max-width: 100%;
             height: 200px;
@@ -34,64 +45,62 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="form-card mx-auto">
             <h1 class="form-title mb-4" th:text="${pet != null ? 'Edit Pet' : 'Add New Pet'}">Pet Form</h1>
-            
-            <form th:action="${pet != null ? '/admin/pets/edit/' + pet.getrasPet() : '/admin/pets/add'}"
-                  method="post"
-                  enctype="multipart/form-data">
-                  
+
+            <form th:action="${pet != null ? '/admin/pets/edit/' + pet.getrasPet() : '/admin/pets/add'}" method="post"
+                enctype="multipart/form-data">
+
                 <div class="mb-3">
                     <label class="form-label">Pet Name</label>
                     <input type="text" class="form-control" name="name" th:if="${pet == null}" required>
-                    <input type="text" class="form-control" name="newName" th:if="${pet != null}" th:value="${pet.getrasPet()}" required>
+                    <input type="text" class="form-control" name="newName" th:if="${pet != null}"
+                        th:value="${pet.getrasPet()}" required>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Category</label>
                     <select class="form-select" name="category" required>
                         <option value="">Select Category</option>
-                        <option th:each="cat : ${categories}"
-                                th:value="${cat}"
-                                th:text="${cat}"
-                                th:selected="${pet != null && pet.getjenisPet() == cat}">
+                        <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}"
+                            th:selected="${pet != null && pet.getjenisPet() == cat}">
                         </option>
                     </select>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Price (Rp)</label>
                     <input type="number" class="form-control" name="price" min="0" step="1000"
-                           th:value="${pet != null ? pet.getHargaPet() : ''}" required>
+                        th:value="${pet != null ? pet.getHargaPet() : ''}" required>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Discount (0-1)</label>
                     <input type="number" class="form-control" name="discount" min="0" max="1" step="0.01"
-                           th:value="${pet != null ? pet.getDiskonPet() : 0}" required>
+                        th:value="${pet != null ? pet.getDiskonPet() : 0}" required>
                 </div>
-                
+
                 <div class="mb-3">
                     <label class="form-label">Stock</label>
                     <input type="number" class="form-control" name="stock" min="0"
-                           th:value="${pet != null ? pet.getStokPet() : ''}" required>
+                        th:value="${pet != null ? pet.getStokPet() : ''}" required>
                 </div>
-                
+
                 <div class="mb-4">
                     <label class="form-label">Pet Image</label>
-                    <input type="file" class="form-control" name="image" accept="image/*"
-                           th:required="${pet == null}" onchange="previewImage(this)">
+                    <input type="file" class="form-control" name="image" accept="image/*" th:required="${pet == null}"
+                        onchange="previewImage(this)">
                     <img id="preview" class="preview-image mt-2 d-none">
-                    <img th:if="${pet != null}" 
-                         th:src="@{'/asset/' + ${#strings.replace(#strings.toLowerCase(pet.getrasPet()),' ','') + '.png'}}"
-                         class="preview-image"
-                         th:alt="${pet.getrasPet()}">
+                    <img th:if="${pet != null}"
+                        th:src="@{'/asset/' + ${#strings.replace(#strings.toLowerCase(pet.getrasPet()),' ','') + '.png'}}"
+                        class="preview-image" th:alt="${pet.getrasPet()}">
                 </div>
-                
+
                 <div class="d-flex gap-2">
-                    <a href="/admin/pets" class="btn btn-outline-secondary flex-grow-1">Cancel</a>
+                    <a href="/admin/pets" class="btn btn-outline-danger flex-grow-1">Cancel</a>
                     <button type="submit" class="btn btn-primary flex-grow-1">
                         <i class="bi" th:classappend="${pet != null ? 'bi-check-lg' : 'bi-plus-lg'}"></i>
                         <span th:text="${pet != null ? 'Save Changes' : 'Add Pet'}">Submit</span>
@@ -100,13 +109,13 @@
             </form>
         </div>
     </div>
-    
+
     <script>
         function previewImage(input) {
             const preview = document.getElementById('preview');
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     preview.src = e.target.result;
                     preview.classList.remove('d-none');
                 }
@@ -115,5 +124,5 @@
         }
     </script>
 </body>
+
 </html>
-    

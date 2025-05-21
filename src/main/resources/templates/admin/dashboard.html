@@ -1,58 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - PetOpia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/shop.css}" />
     <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/admin.css}" />
     <style>
-        body { background: #f8f9fa; }
+        body {
+            background-image: url('https://raw.githubusercontent.com/FaizNation/petOpia/2aa4962529901e0cec5a8120f38b6b68936a88b2/src/main/resources/static/asset/background%20admin1.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: 'Fredoka One', cursive;
+        }
+
         .dashboard-card {
             background: #fff;
-            border: 2px solid #d351ac;
             border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(211,81,172,0.08);
             padding: 32px;
             margin-top: 48px;
+            color: black;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0 black;
         }
+
         .dashboard-title {
-            color: #d351ac;
+            color: #ff5ca8;
             font-weight: bold;
+        }
+
+        .card-body {
+            border-radius: 12px;
+            padding: 32px;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0 black;
+        }
+
+
+        .btn {
+            background-color: #0080ff;
+            color: black;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0 black;
+            transition: all 0.15s ease-in-out;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            color: #ffffff;
+            background-color: #0066ff;
+            box-shadow: 2px 2px 0 #0066ff;
+            transform: translate(2px, 2px);
+            border: 3px solid #000000;
+        }
+
+        .btn:active {
+            box-shadow: inset 2px 2px 0 #0066ff;
+            transform: translate(1px, 1px);
+        }
+
+        .btn-danger {
+            background-color: #ff0000;
+            color: black;
+            border: 3px solid black;
+            box-shadow: 6px 6px 0 black;
+            transition: all 0.15s ease-in-out;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .btn-danger:hover,
+        .btn:focus {
+            color: #ffffff;
+            background-color: #ff0000;
+            box-shadow: 2px 2px 0 #ff0000;
+            transform: translate(2px, 2px);
+            border: 3px solid #000000;
+        }
+
+        .btn:active {
+            box-shadow: inset 2px 2px 0 #ff0000;
+            transform: translate(1px, 1px);
         }
     </style>
 </head>
-<body>  
+
+<body>
     <div class="container">
-        <div class="dashboard-card mt-5">
-            <h1 class="dashboard-title mb-4">Admin Dashboard</h1>            <p>Selamat Datang king, <b>admin</b>!</p>
-            <hr>
+        <div class="dashboard-card mt-5 ">
+            <h1 class="dashboard-title mb-4">Admin Dashboard</h1>
+            <p>Selamat Datang king, <b>admin</b>!</p>
             <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
                 <div class="col">
-                    <div class="card h-100 border-primary">
-                        <div class="card-body">
-                            <h5 class="card-title">Pet Management</h5>
-                            <p class="card-text">Add, edit, or remove pets from the shop inventory.</p>
-                            <a href="/admin/pets" class="btn btn-primary">Manage Pets</a>
-                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Pet Management</h5>
+                        <p class="card-text">Add, edit, or remove pets from the shop inventory.</p>
+                        <a href="/admin/pets" class="btn btn-primary">Manage Pets</a>
                     </div>
                 </div>
-                
-                
+
+
             </div>
             <div class="d-flex justify-content-between align-items-center">
                 <a href="/index" class="btn btn-outline-secondary">
                     <i class="bi bi-house"></i> Back to Homepage
                 </a>
-                <a href="/auth/logout" class="btn btn-outline-danger">
+                <a href="/auth/logout" class="btn-danger btn-outline-danger">
                     <i class="bi bi-box-arrow-right"></i> Logout
                 </a>
             </div>
         </div>
     </div>
 </body>
+
 </html>

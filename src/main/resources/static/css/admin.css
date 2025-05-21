@@ -1,0 +1,17 @@
+body {
+    background: #f8f9fa;
+}
+
+.dashboard-card {
+    background: #fff;
+    border: 2px solid #d351ac;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(211, 81, 172, 0.08);
+    padding: 32px;
+    margin-top: 48px;
+}
+
+.dashboard-title {
+    color: #d351ac;
+    font-weight: bold;
+}
