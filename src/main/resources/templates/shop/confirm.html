@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Order - PetOpia</title>
+    <title>Konfirmasi Pesanan - PetOpia</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
             <div class="col-md-8">
                 <div class="card shadow">
                     <div class="card-body">
-                        <h3 class="card-title mb-4">Review Order</h3>
+                        <h3 class="card-title mb-4">Lihat Pesanan</h3>
 
                         <!-- Progress Bar -->
                         <div class="progress mb-4" style="height: 3px;">
@@ -31,10 +31,10 @@
 
                         <!-- Order Summary -->
                         <div class="mb-4">
-                            <h5>Order Items</h5>
+                            <h5>Pesan Barang</h5>
                             <div th:each="pet : ${cartPets}" class="d-flex justify-content-between mb-2">
                                 <span th:text="${pet.getrasPet() + ' x ' + cart.get(pet.getrasPet())}">Item x
-                                    Quantity</span>
+                                    Kualitas</span>
                                 <span
                                     th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()) * cart.get(pet.getrasPet()), 0, 'COMMA', 0, 'POINT')}">Subtotal</span>
                             </div>
@@ -42,22 +42,22 @@
                             <div class="d-flex justify-content-between">
                                 <strong>Total</strong>
                                 <strong th:text="'Rp ' + ${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}">Total
-                                    Price</strong>
+                                    Harga</strong>
                             </div>
                         </div>
 
                         <!-- Shipping Details -->
                         <div class="mb-4">
                             <h5>Shipping Details</h5>
-                            <p class="mb-1" th:text="${shipping.fullName}">Full Name</p>
-                            <p class="mb-1" th:text="${shipping.address}">Address</p>
-                            <p class="mb-1" th:text="${shipping.city + ' ' + shipping.postalCode}">City, Postal Code</p>
-                            <p class="mb-1" th:text="${shipping.phone}">Phone</p>
+                            <p class="mb-1" th:text="${shipping.fullName}">Nama Lengkap</p>
+                            <p class="mb-1" th:text="${shipping.address}">Alamat</p>
+                            <p class="mb-1" th:text="${shipping.city + ' ' + shipping.postalCode}">Kota, Kode Pos</p>
+                            <p class="mb-1" th:text="${shipping.phone}">Telepon</p>
                         </div>
 
                         <!-- Payment Method -->
                         <div class="mb-4">
-                            <h5>Payment Method</h5>
+                            <h5>Metode Pembayaran</h5>
                             <p class="mb-1">
                                 <i class="bi" th:classappend="${
                                     payment == 'bankTransfer' ? 'bi-bank' : 
@@ -72,9 +72,9 @@
 
                         <!-- Confirm Button -->
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="/shop/payment" class="btn btn-outline-primary">Back to Payment</a>
+                            <a href="/shop/payment" class="btn btn-outline-primary">Kembali ke Pembayaran</a>
                             <form th:action="@{/shop/complete}" method="post">
-                                <button type="submit" class="btn btn-primary">Confirm Order</button>
+                                <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
                             </form>
                         </div>
                     </div>
