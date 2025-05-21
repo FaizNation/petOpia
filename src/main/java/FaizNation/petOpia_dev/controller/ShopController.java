@@ -49,7 +49,7 @@ public class ShopController {
                     .filter(p -> p.getjenisPet().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         }
-        // Apply sorting
+
         if ("price_desc".equals(sort)) {
             filteredPets.sort((a, b) -> Double.compare(b.getHargaPet(), a.getHargaPet()));
         } else if ("price_asc".equals(sort)) {
@@ -76,7 +76,7 @@ public class ShopController {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
         }
-        // Ambil data terbaru setiap kali
+
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
@@ -111,7 +111,6 @@ public class ShopController {
             cart = cartFromSession;
         }
         
-        // Ambil data terbaru setiap kali
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
@@ -122,7 +121,6 @@ public class ShopController {
                 .filter(p -> cart.containsKey(p.getrasPet()))
                 .collect(Collectors.toList());
 
-        // Hitung total harga untuk semua item di keranjang
         double totalPrice = 0.0;
         for (petList pet : cartPets) {
             int quantity = cart.get(pet.getrasPet());
@@ -158,7 +156,6 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         if (cart != null && qty > 0) {
-            // Ambil data terbaru setiap kali
             List<petList> allPets = new ArrayList<>();
             allPets.addAll(services.listKucing);
             allPets.addAll(services.listAnjing);
@@ -184,7 +181,6 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         if (cart != null) {
-            // Ambil data terbaru setiap kali
             List<petList> allPets = new ArrayList<>();
             allPets.addAll(services.listKucing);
             allPets.addAll(services.listAnjing);
@@ -208,7 +204,6 @@ public class ShopController {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Ambil data shipping dari session jika ada
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
         if (shipping != null) {
@@ -228,7 +223,6 @@ public class ShopController {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Store shipping details in session
         Map<String, String> shipping = new HashMap<>();
         shipping.put("fullName", fullName);
         shipping.put("address", address);
@@ -236,14 +230,14 @@ public class ShopController {
         shipping.put("postalCode", postalCode);
         shipping.put("phone", phone);
         session.setAttribute("shipping", shipping);
-        // Pass shipping info to payment page if needed
+        
         model.addAttribute("shipping", shipping);
         return "shop/payment";
     }
 
     @GetMapping("/payment")
     public String showPaymentPage(Model model, HttpSession session) {
-        // Ambil data shipping dari session jika ada
+        
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
         if (shipping != null) {
@@ -259,14 +253,14 @@ public class ShopController {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Save payment method in session for later use
+        
         session.setAttribute("payment", paymentMethod);
-        // Get cart and shipping details
+        
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
-        // Calculate total
+        
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
@@ -291,7 +285,7 @@ public class ShopController {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Build order object (for future persistence or display)
+        
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         @SuppressWarnings("unchecked")
@@ -322,9 +316,9 @@ public class ShopController {
         order.setPaymentMethod((String) session.getAttribute("payment"));
         order.setItems(items);
         order.setTotalAmount(total);
-        // Optionally: save order to DB or session
+        
         session.setAttribute("lastOrder", order);
-        // Clear cart and shipping info
+        
         session.removeAttribute("cart");
         session.removeAttribute("shipping");
         session.removeAttribute("payment");

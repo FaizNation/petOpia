@@ -23,13 +23,11 @@
                     <div class="card-body">
                         <h3 class="card-title mb-4">Lihat Pesanan</h3>
 
-                        <!-- Progress Bar -->
                         <div class="progress mb-4" style="height: 3px;">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 100%;"
                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
 
-                        <!-- Order Summary -->
                         <div class="mb-4">
                             <h5>Pesan Barang</h5>
                             <div th:each="pet : ${cartPets}" class="d-flex justify-content-between mb-2">
@@ -46,7 +44,6 @@
                             </div>
                         </div>
 
-                        <!-- Shipping Details -->
                         <div class="mb-4">
                             <h5>Shipping Details</h5>
                             <p class="mb-1" th:text="${shipping.fullName}">Nama Lengkap</p>
@@ -55,7 +52,6 @@
                             <p class="mb-1" th:text="${shipping.phone}">Telepon</p>
                         </div>
 
-                        <!-- Payment Method -->
                         <div class="mb-4">
                             <h5>Metode Pembayaran</h5>
                             <p class="mb-1">
@@ -70,7 +66,6 @@
                             </p>
                         </div>
 
-                        <!-- Confirm Button -->
                         <div class="d-flex justify-content-between mt-4">
                             <a href="/shop/payment" class="btn btn-outline-primary btn-brutal-5">Kembali ke Pembayaran</a>
                             <form th:action="@{/shop/complete}" method="post">

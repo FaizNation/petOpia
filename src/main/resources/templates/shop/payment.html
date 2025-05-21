@@ -23,13 +23,11 @@
                     <div class="card-body">
                         <h3 class="card-title mb-4">Metode Pembayaran</h3>
 
-                        <!-- Progress Bar -->
                         <div class="progress mb-4" style="height: 3px;">
                             <div class="progress-bar bg-primary" role="progressbar" style="width: 66%;"
                                 aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
 
-                        <!-- Payment Method Form -->
                         <form th:action="@{/shop/confirm}" method="post">
                             <div class="mb-4">
                                 <div class="form-check mb-3">
@@ -56,8 +54,6 @@
                                     </label>
                                 </div>
                             </div>
-
-                            <!-- Shipping Info Display (Optional) -->
                             <div th:if="${shipping != null}" class="mb-3">
                                 <h5>Info Pengiriman</h5>
                                 <p th:text="${shipping.fullName}"></p>

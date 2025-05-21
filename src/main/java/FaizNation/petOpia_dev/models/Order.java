@@ -16,13 +16,13 @@ public class Order {
     private String status;
     private List<OrderItem> items;
 
-    // Constructors
+    
     public Order() {
         this.orderDate = LocalDateTime.now();
         this.status = "PENDING";
     }
 
-    // Getters and Setters
+    
     public String getOrderId() {
         return orderId;
     }

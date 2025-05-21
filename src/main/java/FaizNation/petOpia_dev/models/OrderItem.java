@@ -19,7 +19,7 @@ public class OrderItem {
         return price * (1 - discount) * quantity;
     }
 
-    // Getters and Setters
+    
     public String getPetName() {
         return petName;
     }

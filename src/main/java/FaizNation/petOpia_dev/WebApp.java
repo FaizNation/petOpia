@@ -19,6 +19,6 @@ public class WebApp {
     @GetMapping("/shop")
     public String showShop () {
         return "shop/product"; 
-    }    // Remove showAllPets method as this functionality is now in ShopController
+    }    
 }
 

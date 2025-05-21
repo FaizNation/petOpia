@@ -61,7 +61,6 @@ public class AdminController {
             return "redirect:/auth/login";
         }
 
-        // Save image
         if (!image.isEmpty()) {
             String fileName = name.toLowerCase().replace(" ", "") + ".png";
             Path imagePath = Paths.get("src/main/resources/static/asset/" + fileName);
