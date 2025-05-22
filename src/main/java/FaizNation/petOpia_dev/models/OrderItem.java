@@ -59,4 +59,3 @@ public class OrderItem {
         this.discount = discount;
     }
 }
-//     public void setPhone(String phone) {

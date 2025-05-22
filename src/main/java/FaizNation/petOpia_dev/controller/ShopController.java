@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import FaizNation.petOpia_dev.models.petList;
 import FaizNation.petOpia_dev.services.services;
 import jakarta.servlet.http.HttpSession;
@@ -48,7 +50,6 @@ public class ShopController {
                     .filter(p -> p.getjenisPet().equalsIgnoreCase(category))
                     .collect(Collectors.toList());
         }
-        // Apply sorting
         if ("price_desc".equals(sort)) {
             filteredPets.sort((a, b) -> Double.compare(b.getHargaPet(), a.getHargaPet()));
         } else if ("price_asc".equals(sort)) {

@@ -1,12 +1,9 @@
 jQuery("#carousel").owlCarousel({
   autoplay: true,
-  rewind: false, /* use rewind if you don't want loop */
+  rewind: false,
   margin: 20,
   loop: true,
-   /*
-  animateOut: 'fadeOut',
-  animateIn: 'fadeIn',
-  */
+
   responsiveClass: true,
   autoHeight: true,
   autoplayTimeout: 7000,
@@ -14,36 +11,38 @@ jQuery("#carousel").owlCarousel({
   nav: true,
   navText: [
     '<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg>',
-    '<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>'],
+    '<svg width="50" height="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>',
+  ],
   responsive: {
     0: {
-      items: 1
+      items: 1,
     },
 
     600: {
-      items: 3
+      items: 3,
     },
 
     1024: {
-      items: 4
+      items: 4,
     },
 
     1366: {
-      items: 4
-    }
-  }
+      items: 4,
+    },
+  },
 });
 
-$(document).ready(function() {
-  // Trigger modal alert for Paw's Sale items
-  $('#carousel').on('click', '.paws-sale-link', function(e) {
+$(document).ready(function () {
+  $("#carousel").on("click", ".paws-sale-link", function (e) {
     e.preventDefault();
-    var imgSrc = $(this).data('img');
-    var nama = $(this).data('nama');
-    var harga = $(this).data('harga');
-    var alertText = $(this).data('alert');
-    $('#pawsSaleModalImg').attr('src', imgSrc);
-    $('#pawsSaleModalText').html('<b>' + nama + '</b><br>' + harga + '<br><br>' + alertText);
-    $('#pawsSaleAlertModal').modal('show');
+    var imgSrc = $(this).data("img");
+    var nama = $(this).data("nama");
+    var harga = $(this).data("harga");
+    var alertText = $(this).data("alert");
+    $("#pawsSaleModalImg").attr("src", imgSrc);
+    $("#pawsSaleModalText").html(
+      "<b>" + nama + "</b><br>" + harga + "<br><br>" + alertText
+    );
+    $("#pawsSaleAlertModal").modal("show");
   });
 });

@@ -211,7 +211,6 @@ public class AdminController {
                     try {
                         pet.getHealthRecord().setLastCheckup(java.time.LocalDate.parse(lastCheckup));
                     } catch (Exception e) {
-                        // ignore parse error, do not update
                     }
                 }
             }
