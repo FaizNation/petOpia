@@ -19,7 +19,6 @@ public class OrderItem {
         return price * (1 - discount) * quantity;
     }
 
-    
     public String getPetName() {
         return petName;
     }
@@ -60,3 +59,4 @@ public class OrderItem {
         this.discount = discount;
     }
 }
+//     public void setPhone(String phone) {

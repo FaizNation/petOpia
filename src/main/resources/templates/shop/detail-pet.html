@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pet - PetOpia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/shop.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+    <div class="container mt-5 pt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <img th:src="@{'/asset/' + ${#strings.replace(#strings.toLowerCase(pet.getrasPet()), ' ', '') + '.png'}}" class="img-fluid rounded shadow" th:alt="${pet.getrasPet()}" style="max-height:350px;object-fit:cover;">
+            </div>
+            <div class="col-md-6">
+                <h2 th:text="${pet.getrasPet()}">Nama Pet</h2>
+                <span class="badge bg-success mb-2" th:text="${pet.getjenisPet()}">Kategori</span>
+                <h4 class="text-danger" th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet() * (1 - pet.getDiskonPet()), 0, 'COMMA', 0, 'POINT')}">Harga Diskon</h4>
+                <span class="text-muted text-decoration-line-through" th:if="${pet.getDiskonPet() > 0}" th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet(), 0, 'COMMA', 0, 'POINT')}">Harga Asli</span>
+                <div class="mb-2">
+                    <span th:if="${pet.getStokPet() > 0}" class="badge bg-success">In Stock</span>
+                    <span th:if="${pet.getStokPet() <= 0}" class="badge bg-danger">Out of Stock</span>
+                    <span class="ms-2" th:text="${pet.getStokPet()} + ' tersedia'"></span>
+                </div>
+                <div class="mb-3">
+                    <b>Diskon:</b> <span th:text="${pet.getDiskonPet() * 100} + '%'">0%</span>
+                </div>
+
+                <div th:if="${pet.getjenisPet() == 'Kucing'}">
+                    <div><b>Bulu:</b> <span th:text="${pet.getManteBulu() != null ? pet.getManteBulu() : '-'}">-</span></div>
+                    <div><b>Keramahan:</b> <span th:text="${pet.getKeramahan() != null ? pet.getKeramahan() : '-'}">-</span></div>
+                </div>
+
+                <div th:if="${pet.getjenisPet() == 'Burung'}">
+                    <div><b>Berat:</b> <span th:text="${pet.getBerat() != null ? pet.getBerat() : '-'}">-</span></div>
+                    <div><b>Kicauan:</b> <span th:text="${pet.getKicauan() != null ? pet.getKicauan() : '-'}">-</span></div>
+                </div>
+
+                <div th:if="${pet.getjenisPet() == 'Anjing'}">
+                    <div><b>Tinggi:</b> <span th:text="${pet.getTinggi() != null ? pet.getTinggi() : '-'}">-</span></div>
+                    <div><b>Rating Latihan:</b> <span th:text="${pet.getLatihan() != null ? pet.getLatihan() : '-'}">-</span></div>
+                </div>
+
+                <div th:if="${pet.getjenisPet() == 'Ikan'}">
+                    <div><b>Nama Ilmiah:</b> <span th:text="${pet.getIlmiah() != null ? pet.getIlmiah() : '-'}">-</span></div>
+                    <div><b>Suhu Air:</b> <span th:text="${pet.getSuhuAir() != null ? pet.getSuhuAir() : '-'}">-</span></div>
+                </div>
+                <div class="mb-3">
+                    <b>Status Vaksinasi:</b> <span th:text="${pet.getHealthRecord() != null ? pet.getHealthRecord().getVaccineStatus() : '-'}">-</span><br>
+                    <b>Tanggal Vaksinasi:</b> <span th:text="${pet.getHealthRecord() != null && pet.getHealthRecord().getLastCheckup() != null ? #temporals.format(pet.getHealthRecord().getLastCheckup(), 'dd MMM yyyy') : '-'}">-</span>
+                </div>
+                <form th:action="@{/shop/add-to-cart}" method="post" class="d-flex gap-2 mt-4">
+                    <input type="hidden" name="rasPet" th:value="${pet.getrasPet()}" />
+                    <input type="number" name="qty" min="1" th:attr="max=${pet.getStokPet()}" value="1" class="form-control btn-brutal-2" style="width: 70px;" th:disabled="${pet.getStokPet() <= 0}" />
+                    <button class="btn btn-primary flex-grow-1 btn-brutal-4" type="submit" th:disabled="${pet.getStokPet() <= 0}">
+                        <i class="bi bi-cart-plus "></i> Tambahkan Ke Keranjang
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

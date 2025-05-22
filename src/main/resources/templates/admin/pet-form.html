@@ -89,6 +89,18 @@
                         th:value="${pet != null ? pet.getStokPet() : ''}" required>
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Status Vaksinasi</label>
+                    <input type="text" class="form-control" name="vaccineStatus"
+                        th:value="${pet != null ? pet.getHealthRecord() != null ? pet.getHealthRecord().getVaccineStatus() : '' : ''}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tanggal Vaksinasi Terakhir</label>
+                    <input type="date" class="form-control" name="lastCheckup"
+                        th:value="${pet != null && pet.getHealthRecord() != null && pet.getHealthRecord().getLastCheckup() != null ? pet.getHealthRecord().getLastCheckup() : ''}">
+                </div>
+
                 <div class="mb-4">
                     <label class="form-label">Pet Image</label>
                     <input type="file" class="form-control" name="image" accept="image/*" th:required="${pet == null}"
@@ -97,6 +109,39 @@
                     <img th:if="${pet != null}"
                         th:src="@{'/asset/' + ${#strings.replace(#strings.toLowerCase(pet.getrasPet()),' ','') + '.png'}}"
                         class="preview-image" th:alt="${pet.getrasPet()}">
+                </div>
+
+                <div class="mb-3" id="cat-fields" style="display:none;">
+                    <label class="form-label">Mantel Bulu</label>
+                    <input type="text" class="form-control" name="mantelBulu"
+                        th:value="${pet != null && pet.getjenisPet() == 'Kucing' ? pet.getManteBulu() : ''}">
+                    <label class="form-label mt-2">Keramahan</label>
+                    <input type="text" class="form-control" name="keramahan"
+                        th:value="${pet != null && pet.getjenisPet() == 'Kucing' ? pet.getKeramahan() : ''}">
+                </div>
+                <div class="mb-3" id="dog-fields" style="display:none;">
+                    <label class="form-label">Tinggi</label>
+                    <input type="text" class="form-control" name="tinggi"
+                        th:value="${pet != null && pet.getjenisPet() == 'Anjing' ? pet.getTinggi() : ''}">
+                    <label class="form-label mt-2">Rating Latihan</label>
+                    <input type="text" class="form-control" name="latihan"
+                        th:value="${pet != null && pet.getjenisPet() == 'Anjing' ? pet.getLatihan() : ''}">
+                </div>
+                <div class="mb-3" id="fish-fields" style="display:none;">
+                    <label class="form-label">Nama Ilmiah</label>
+                    <input type="text" class="form-control" name="ilmiah"
+                        th:value="${pet != null && pet.getjenisPet() == 'Ikan' ? pet.getIlmiah() : ''}">
+                    <label class="form-label mt-2">Suhu Air</label>
+                    <input type="text" class="form-control" name="suhuAir"
+                        th:value="${pet != null && pet.getjenisPet() == 'Ikan' ? pet.getSuhuAir() : ''}">
+                </div>
+                <div class="mb-3" id="bird-fields" style="display:none;">
+                    <label class="form-label">Berat</label>
+                    <input type="text" class="form-control" name="berat"
+                        th:value="${pet != null && pet.getjenisPet() == 'Burung' ? pet.getBerat() : ''}">
+                    <label class="form-label mt-2">Kicauan</label>
+                    <input type="text" class="form-control" name="kiacuan"
+                        th:value="${pet != null && pet.getjenisPet() == 'Burung' ? pet.getKicauan() : ''}">
                 </div>
 
                 <div class="d-flex gap-2">
@@ -122,6 +167,25 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        function showInheritanceFields() {
+            var cat = document.getElementById('cat-fields');
+            var dog = document.getElementById('dog-fields');
+            var fish = document.getElementById('fish-fields');
+            var bird = document.getElementById('bird-fields');
+            var category = document.querySelector('select[name="category"]').value;
+            cat.style.display = category === 'Kucing' ? '' : 'none';
+            dog.style.display = category === 'Anjing' ? '' : 'none';
+            fish.style.display = category === 'Ikan' ? '' : 'none';
+            bird.style.display = category === 'Burung' ? '' : 'none';
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var select = document.querySelector('select[name="category"]');
+            if(select) {
+                select.addEventListener('change', showInheritanceFields);
+                showInheritanceFields();
+            }
+        });
     </script>
 </body>
 

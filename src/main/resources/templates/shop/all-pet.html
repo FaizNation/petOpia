@@ -79,6 +79,8 @@
                         <h5 class="card-title" th:text="${pet.getrasPet() != null ? pet.getrasPet() : 'Unknown Pet'}">
                             Nama Hewan
                         </h5>
+                        <a th:href="@{'/shop/detail/' + ${pet.getrasPet()}}" class="btn btn-outline-info btn-sm mb-2">Lihat Detail</a>
+                        
                         <div class="mb-3"> <span class="text-decoration-line-through text-muted"
                                 th:if="${pet.getHargaPet() != null}"
                                 th:text="'Rp ' + ${#numbers.formatDecimal(pet.getHargaPet(), 0, 'COMMA', 0, 'POINT')}">
@@ -106,6 +108,7 @@
                             <small class="text-muted" th:if="${pet.getStokPet() != null}"
                                 th:text="${pet.getStokPet()} + ' available'">Stock</small>
                         </div>
+                    
                         <form th:action="@{/shop/add-to-cart}" method="post" class="d-flex gap-2">
                             <input type="hidden" name="rasPet" th:value="${pet.getrasPet()}" />
                             <input type="number" name="qty" min="1" 

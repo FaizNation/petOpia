@@ -2,7 +2,7 @@ package FaizNation.petOpia_dev.models;
 
 import java.time.LocalDate;
 
-public class ikan extends petList{
+public class ikan extends petList {
     private String ilmiah;
     private String suhuAir;
 

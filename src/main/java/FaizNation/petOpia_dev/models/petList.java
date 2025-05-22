@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class petList {
-     private String rasPet;
+    private String rasPet;
     private double hargaPet;
     protected int stokPet;
     private String jenisPet;

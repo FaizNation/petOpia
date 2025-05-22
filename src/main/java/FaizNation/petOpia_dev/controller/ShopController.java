@@ -7,14 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import FaizNation.petOpia_dev.models.petList;
 import FaizNation.petOpia_dev.services.services;
 import jakarta.servlet.http.HttpSession;
@@ -76,7 +75,7 @@ public class ShopController {
             cart = new HashMap<>();
             session.setAttribute("cart", cart);
         }
-        // Ambil data terbaru setiap kali
+
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
@@ -89,7 +88,8 @@ public class ShopController {
                 if (toAdd > 0) {
                     pet.setStokPet(available - toAdd);
                     cart.put(rasPet, cart.getOrDefault(rasPet, 0) + toAdd);
-                    session.setAttribute("cartMessage", "Berhasil menambahkan " + toAdd + " '" + rasPet + "' ke keranjang!");
+                    session.setAttribute("cartMessage",
+                            "Berhasil menambahkan " + toAdd + " '" + rasPet + "' ke keranjang!");
                 } else {
                     session.setAttribute("cartMessage", "Stok untuk '" + rasPet + "' tidak mencukupi!");
                 }
@@ -110,19 +110,16 @@ public class ShopController {
         } else {
             cart = cartFromSession;
         }
-        
-        // Ambil data terbaru setiap kali
+
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
         allPets.addAll(services.listBurung);
         allPets.addAll(services.listIkan);
-        
+
         List<petList> cartPets = allPets.stream()
                 .filter(p -> cart.containsKey(p.getrasPet()))
                 .collect(Collectors.toList());
-
-        // Hitung total harga untuk semua item di keranjang
         double totalPrice = 0.0;
         for (petList pet : cartPets) {
             int quantity = cart.get(pet.getrasPet());
@@ -133,13 +130,13 @@ public class ShopController {
         model.addAttribute("cart", cart);
         model.addAttribute("cartPets", cartPets);
         model.addAttribute("totalPrice", totalPrice);
-        
+
         Object cartMessage = session.getAttribute("cartMessage");
         if (cartMessage != null) {
             model.addAttribute("cartMessage", cartMessage);
             session.removeAttribute("cartMessage");
         }
-        
+
         return "shop/cart";
     }
 
@@ -158,7 +155,6 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         if (cart != null && qty > 0) {
-            // Ambil data terbaru setiap kali
             List<petList> allPets = new ArrayList<>();
             allPets.addAll(services.listKucing);
             allPets.addAll(services.listAnjing);
@@ -171,7 +167,8 @@ public class ShopController {
                     int toSet = Math.min(qty, available);
                     pet.setStokPet(available - toSet);
                     cart.put(rasPet, toSet);
-                    session.setAttribute("cartMessage", "Jumlah '" + rasPet + "' di keranjang diubah menjadi " + toSet + ".");
+                    session.setAttribute("cartMessage",
+                            "Jumlah '" + rasPet + "' di keranjang diubah menjadi " + toSet + ".");
                     break;
                 }
             }
@@ -184,7 +181,6 @@ public class ShopController {
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         if (cart != null) {
-            // Ambil data terbaru setiap kali
             List<petList> allPets = new ArrayList<>();
             allPets.addAll(services.listKucing);
             allPets.addAll(services.listAnjing);
@@ -208,7 +204,6 @@ public class ShopController {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Ambil data shipping dari session jika ada
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
         if (shipping != null) {
@@ -219,16 +214,15 @@ public class ShopController {
 
     @PostMapping("/payment")
     public String showPayment(@RequestParam String fullName,
-                            @RequestParam String address,
-                            @RequestParam String city,
-                            @RequestParam String postalCode,
-                            @RequestParam String phone,
-                            Model model,
-                            HttpSession session) {
+            @RequestParam String address,
+            @RequestParam String city,
+            @RequestParam String postalCode,
+            @RequestParam String phone,
+            Model model,
+            HttpSession session) {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Store shipping details in session
         Map<String, String> shipping = new HashMap<>();
         shipping.put("fullName", fullName);
         shipping.put("address", address);
@@ -236,14 +230,12 @@ public class ShopController {
         shipping.put("postalCode", postalCode);
         shipping.put("phone", phone);
         session.setAttribute("shipping", shipping);
-        // Pass shipping info to payment page if needed
         model.addAttribute("shipping", shipping);
         return "shop/payment";
     }
 
     @GetMapping("/payment")
     public String showPaymentPage(Model model, HttpSession session) {
-        // Ambil data shipping dari session jika ada
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
         if (shipping != null) {
@@ -254,19 +246,16 @@ public class ShopController {
 
     @PostMapping("/confirm")
     public String showConfirmation(@RequestParam String paymentMethod,
-                                 Model model,
-                                 HttpSession session) {
+            Model model,
+            HttpSession session) {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Save payment method in session for later use
         session.setAttribute("payment", paymentMethod);
-        // Get cart and shipping details
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         @SuppressWarnings("unchecked")
         Map<String, String> shipping = (Map<String, String>) session.getAttribute("shipping");
-        // Calculate total
         List<petList> allPets = new ArrayList<>();
         allPets.addAll(services.listKucing);
         allPets.addAll(services.listAnjing);
@@ -291,7 +280,6 @@ public class ShopController {
         if (!validateCart(session)) {
             return "redirect:/shop/cart";
         }
-        // Build order object (for future persistence or display)
         @SuppressWarnings("unchecked")
         Map<String, Integer> cart = (Map<String, Integer>) session.getAttribute("cart");
         @SuppressWarnings("unchecked")
@@ -310,7 +298,8 @@ public class ShopController {
             int qty = cart.get(pet.getrasPet());
             double price = pet.getHargaPet();
             double discount = pet.getDiskonPet();
-            items.add(new FaizNation.petOpia_dev.models.OrderItem(pet.getrasPet(), pet.getjenisPet(), qty, price, discount));
+            items.add(new FaizNation.petOpia_dev.models.OrderItem(pet.getrasPet(), pet.getjenisPet(), qty, price,
+                    discount));
             total += price * (1 - discount) * qty;
         }
         FaizNation.petOpia_dev.models.Order order = new FaizNation.petOpia_dev.models.Order();
@@ -322,9 +311,7 @@ public class ShopController {
         order.setPaymentMethod((String) session.getAttribute("payment"));
         order.setItems(items);
         order.setTotalAmount(total);
-        // Optionally: save order to DB or session
         session.setAttribute("lastOrder", order);
-        // Clear cart and shipping info
         session.removeAttribute("cart");
         session.removeAttribute("shipping");
         session.removeAttribute("payment");
@@ -334,6 +321,16 @@ public class ShopController {
     @GetMapping("/success")
     public String showSuccess() {
         return "shop/success";
+    }
+
+    @GetMapping("/detail/{rasPet}")
+    public String detailPet(@PathVariable String rasPet, Model model) {
+        petList pet = services.findPetByName(rasPet);
+        if (pet == null) {
+            return "redirect:/shop/all-pet";
+        }
+        model.addAttribute("pet", pet);
+        return "shop/detail-pet";
     }
 
     private boolean validateCart(HttpSession session) {

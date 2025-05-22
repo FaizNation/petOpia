@@ -2,7 +2,7 @@ package FaizNation.petOpia_dev.models;
 
 import java.time.LocalDate;
 
-public class anjing extends petList{
+public class anjing extends petList {
     private String tinggi;
     private String latihan;
 

@@ -15,10 +15,5 @@ public class WebApp {
     public String showIndex () {
         return "index";
     }
-
-    @GetMapping("/shop")
-    public String showShop () {
-        return "shop/product"; 
-    }    
+   
 }
-

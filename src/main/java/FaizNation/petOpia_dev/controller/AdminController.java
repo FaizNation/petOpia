@@ -50,11 +50,22 @@ public class AdminController {
     }
 
     @PostMapping("/pets/add")
-    public String addPet(@RequestParam String name,
+    public String addPet(
+            @RequestParam String name,
             @RequestParam String category,
             @RequestParam double price,
             @RequestParam double discount,
             @RequestParam int stock,
+            @RequestParam(required = false) String mantelBulu,
+            @RequestParam(required = false) String keramahan,
+            @RequestParam(required = false) String tinggi,
+            @RequestParam(required = false) String latihan,
+            @RequestParam(required = false) String ilmiah,
+            @RequestParam(required = false) String suhuAir,
+            @RequestParam(required = false) String berat,
+            @RequestParam(required = false) String kiacuan,
+            @RequestParam(required = false) String vaccineStatus,
+            @RequestParam(required = false) String lastCheckup,
             @RequestParam MultipartFile image,
             HttpSession session) throws IOException {
         if (!isAdmin(session)) {
@@ -67,27 +78,42 @@ public class AdminController {
             Files.copy(image.getInputStream(), imagePath, StandardCopyOption.REPLACE_EXISTING);
         }
 
-
         petList newPet;
+        LocalDate checkupDate = null;
+        if (lastCheckup != null && !lastCheckup.isEmpty()) {
+            checkupDate = LocalDate.parse(lastCheckup);
+        } else {
+            checkupDate = LocalDate.now();
+        }
+        if (vaccineStatus == null) vaccineStatus = "Pending";
+
         switch (category.toLowerCase()) {
             case "kucing":
-                newPet = new kucing(name, price, stock, category, discount, "Unknown", "■■■■-", LocalDate.now(),
-                        "Pending");
+                newPet = new kucing(name, price, stock, category, discount,
+                        mantelBulu != null ? mantelBulu : "Unknown",
+                        keramahan != null ? keramahan : "■■■■-",
+                        checkupDate, vaccineStatus);
                 services.listKucing.add((kucing) newPet);
                 break;
             case "anjing":
-                newPet = new anjing(name, price, stock, category, discount, "Unknown", "■■■■-", LocalDate.now(),
-                        "Pending");
+                newPet = new anjing(name, price, stock, category, discount,
+                        tinggi != null ? tinggi : "Unknown",
+                        latihan != null ? latihan : "■■■■-",
+                        checkupDate, vaccineStatus);
                 services.listAnjing.add((anjing) newPet);
                 break;
             case "burung":
-                newPet = new burung(name, price, stock, category, discount, "Unknown", "Unknown", LocalDate.now(),
-                        "Pending");
+                newPet = new burung(name, price, stock, category, discount,
+                        berat != null ? berat : "Unknown",
+                        kiacuan != null ? kiacuan : "Unknown",
+                        checkupDate, vaccineStatus);
                 services.listBurung.add((burung) newPet);
                 break;
             case "ikan":
-                newPet = new ikan(name, price, stock, category, discount, "Unknown", "Unknown", LocalDate.now(),
-                        "Pending");
+                newPet = new ikan(name, price, stock, category, discount,
+                        ilmiah != null ? ilmiah : "Unknown",
+                        suhuAir != null ? suhuAir : "Unknown",
+                        checkupDate, vaccineStatus);
                 services.listIkan.add((ikan) newPet);
                 break;
             default:
@@ -121,6 +147,16 @@ public class AdminController {
             @RequestParam double discount,
             @RequestParam int stock,
             @RequestParam(required = false) MultipartFile image,
+            @RequestParam(required = false) String mantelBulu,
+            @RequestParam(required = false) String keramahan,
+            @RequestParam(required = false) String tinggi,
+            @RequestParam(required = false) String latihan,
+            @RequestParam(required = false) String ilmiah,
+            @RequestParam(required = false) String suhuAir,
+            @RequestParam(required = false) String berat,
+            @RequestParam(required = false) String kiacuan,
+            @RequestParam(required = false) String vaccineStatus,
+            @RequestParam(required = false) String lastCheckup,
             HttpSession session) throws IOException {
         if (!isAdmin(session)) {
             return "redirect:/auth/login";
@@ -139,8 +175,47 @@ public class AdminController {
             pet.setStokPet(stock);
             pet.setjenisPet(category);
             pet.setDiskonPet(discount);
-        }
 
+            switch (category) {
+                case "Kucing":
+                    if (pet instanceof FaizNation.petOpia_dev.models.kucing) {
+                        ((FaizNation.petOpia_dev.models.kucing) pet).setMantelBulu(mantelBulu);
+                        ((FaizNation.petOpia_dev.models.kucing) pet).setKeramahan(keramahan);
+                    }
+                    break;
+                case "Anjing":
+                    if (pet instanceof FaizNation.petOpia_dev.models.anjing) {
+                        ((FaizNation.petOpia_dev.models.anjing) pet).setTinggi(tinggi);
+                        ((FaizNation.petOpia_dev.models.anjing) pet).setLatihan(latihan);
+                    }
+                    break;
+                case "Ikan":
+                    if (pet instanceof FaizNation.petOpia_dev.models.ikan) {
+                        ((FaizNation.petOpia_dev.models.ikan) pet).setIlmiah(ilmiah);
+                        ((FaizNation.petOpia_dev.models.ikan) pet).setSuhuAir(suhuAir);
+                    }
+                    break;
+                case "Burung":
+                    if (pet instanceof FaizNation.petOpia_dev.models.burung) {
+                        ((FaizNation.petOpia_dev.models.burung) pet).setBerat(berat);
+                        ((FaizNation.petOpia_dev.models.burung) pet).setKicauan(kiacuan);
+                    }
+                    break;
+            }
+            // Update vaccine status and last checkup if provided
+            if (pet.getHealthRecord() != null) {
+                if (vaccineStatus != null && !vaccineStatus.isEmpty()) {
+                    pet.getHealthRecord().setVaccineStatus(vaccineStatus);
+                }
+                if (lastCheckup != null && !lastCheckup.isEmpty()) {
+                    try {
+                        pet.getHealthRecord().setLastCheckup(java.time.LocalDate.parse(lastCheckup));
+                    } catch (Exception e) {
+                        // ignore parse error, do not update
+                    }
+                }
+            }
+        }
         return "redirect:/admin/pets";
     }
 
