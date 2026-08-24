@@ -45,7 +45,7 @@
 
 ---
 
-##  Contributor
+<!-- ##  Contributor
 |PROFIL |NAMA | NIM |
 |-|-------|--------|
 | [<img src="https://avatars.githubusercontent.com/u/178456352?v=4" width="50"/>](https://github.com/FaizNation) |**Fadly Fais Fajarruddin** | 24111814015 |
@@ -55,7 +55,7 @@
 | [<img src="https://avatars.githubusercontent.com/u/207872670?v=4" width="50"/>](https://github.com/maulidhea) |**Hanna Maulidhea** | 24111814091 |
 | [<img src="https://avatars.githubusercontent.com/u/200033565?v=4" width="50"/>](https://github.com/IlDarkCloud) |**Ismail Ali Mukharom** | 24111814130 |
 | [<img src="https://avatars.githubusercontent.com/u/208164527?v=4" width="50"/>](https://github.com/DitPrata03) |**Fajar Adhitya Pratama** | 24111814087 |
-
+-->
 ---
 ## 📸 Preview
 ```
@@ -72,19 +72,10 @@
 - Pembelian Hewan 
 - Perhitungan Total Harga 
 
-
-## License: 
-- [MIT](https://choosealicense.com/licenses/mit/)
-
 ## Thanks to
 
-| [<img src="https://avatars.githubusercontent.com/u/189825677?v=4" width="250"/>](https://github.com/Apissr) | [<img src="https://avatars.githubusercontent.com/u/207812064?v=4" width="250"/>](https://github.com/rahmatsigma) |[<img src="https://avatars.githubusercontent.com/u/207877704?v=4" width="250"/>](https://github.com/mandaazaziah)  |
-| --- | --- | --- |
-| **Muhammad Hafizh Shafa Rabbani** | **Riski Rahmattillah Pratama** | **Manda Fatimah Azaziah** |
-
-| [<img src="https://avatars.githubusercontent.com/u/208164527?v=4" width="250"/>](https://github.com/DitPrata03) |[<img src="https://avatars.githubusercontent.com/u/207872670?v=4" width="250"/>](https://github.com/maulidhea) | [<img src="https://avatars.githubusercontent.com/u/200033565?v=4" width="250"/>](https://github.com/IlDarkCloud) |
-| --- | --- | --- |
-| **Fajar Adhitya Pratama** | **Hanna Maulidhea** | **Ismail Ali Mukharom** |
+| [<img src="https://avatars.githubusercontent.com/u/189825677?v=4" width="100"/>](https://github.com/Apissr) | [<img src="https://avatars.githubusercontent.com/u/207812064?v=4" width="100"/>](https://github.com/rahmatsigma) |[<img src="https://avatars.githubusercontent.com/u/207877704?v=4" width="100"/>](https://github.com/mandaazaziah) | [<img src="https://avatars.githubusercontent.com/u/208164527?v=4" width="100"/>](https://github.com/DitPrata03) |[<img src="https://avatars.githubusercontent.com/u/207872670?v=4" width="100"/>](https://github.com/maulidhea) | [<img src="https://avatars.githubusercontent.com/u/200033565?v=4" width="100"/>](https://github.com/IlDarkCloud) |
+| --- | --- | --- | --- | --- | --- |
 
 ## Dependency Management
 
